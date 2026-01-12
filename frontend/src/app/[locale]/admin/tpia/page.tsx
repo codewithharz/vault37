@@ -24,7 +24,7 @@ export default function AdminTPIAPage() {
     const [tpias, setTPIAs] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('all');
-    const [pagination, setPagination] = useState({ page: 1, total: 0, pages: 1 });
+    const [pagination, setPagination] = useState({ page: 1, total: 0, totalValue: 0, pages: 1 });
     const t = useTranslations("AdminTPIA");
     const tCommon = useTranslations("Common");
     const locale = useLocale();
@@ -165,9 +165,17 @@ export default function AdminTPIAPage() {
                     <h2 className="text-2xl font-bold tracking-tight text-gray-900">{t('title')}</h2>
                     <p className="text-gray-500">{t('description')}</p>
                 </div>
-                <div className="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 border border-blue-100">
-                    <TrendingUp className="w-4 h-4" />
-                    {t('statsLabel', { total: pagination.total })}
+                <div className="flex gap-2">
+                    <div className="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 border border-blue-100">
+                        <TrendingUp className="w-4 h-4" />
+                        {t('statsLabel', { total: pagination.total })}
+                    </div>
+                    {pagination.totalValue > 0 && (
+                        <div className="bg-green-50 text-green-700 px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 border border-green-100">
+                            <ShieldCheck className="w-4 h-4" />
+                            ₦{pagination.totalValue.toLocaleString()}
+                        </div>
+                    )}
                 </div>
             </div>
 

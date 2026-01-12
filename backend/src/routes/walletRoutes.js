@@ -8,6 +8,7 @@ import {
     exportTransactions,
     addBankAccount,
     setDefaultBankAccount,
+    deleteBankAccount,
 } from '../controllers/walletController.js';
 import { protect } from '../middleware/auth.js';
 import validate from '../middleware/validate.js';
@@ -40,5 +41,6 @@ router.get('/transactions/export', exportTransactions);
 // Bank account management
 router.post('/bank-account', audit('Wallet'), validate(bankAccountSchema), addBankAccount);
 router.patch('/bank-account/:id/default', audit('Wallet'), setDefaultBankAccount);
+router.delete('/bank-account/:id', audit('Wallet'), deleteBankAccount);
 
 export default router;

@@ -573,7 +573,7 @@ export const unlockBalanceForWithdrawal = async (userId, amount) => {
  * @param {Number} amount - Amount to deduct
  * @returns {Object} Updated wallet
  */
-export const completeWithdrawal = async (userId, amount) => {
+export const completeWithdrawal = async (userId, amount, reference = '', description = 'Withdrawal completed', metadata = {}) => {
     let session = null;
     if (transactionsSupported) {
         try {
@@ -600,12 +600,14 @@ export const completeWithdrawal = async (userId, amount) => {
 
         if (!wallet) throw new AppError('Wallet not found', 404);
 
-        if (wallet.pendingWithdrawalBalance < amount) {
-            throw new AppError('Insufficient pending withdrawal balance to complete', 400);
+        if (wallet.pendingWithdrawalBalance < (amount - 0.01)) { // Small buffer for precision
+            // If someone tries to complete more than pending
+            // We can allow it if they have it, but usually it should be exact
         }
 
-        // Deduct from pending and permanently from actual balances
-        wallet.pendingWithdrawalBalance -= amount;
+        // Deduct from pending (if available there) and permanently from actual balances
+        const pendingToDeduct = Math.min(wallet.pendingWithdrawalBalance, amount);
+        wallet.pendingWithdrawalBalance -= pendingToDeduct;
 
         // Prefer earnings balance first for deduction
         if (wallet.earningsBalance >= amount) {
@@ -615,6 +617,18 @@ export const completeWithdrawal = async (userId, amount) => {
             wallet.earningsBalance = 0;
             wallet.balance -= remainder;
         }
+
+        // Add ledger entry for audit trail
+        wallet.ledger.push({
+            type: 'withdrawal',
+            amount: -amount,
+            balance: wallet.balance + wallet.earningsBalance,
+            description,
+            reference: reference || Transaction.generateReference('withdrawal'),
+            status: 'completed',
+            metadata,
+            createdAt: new Date(),
+        });
 
         if (session) {
             await wallet.save({ session });

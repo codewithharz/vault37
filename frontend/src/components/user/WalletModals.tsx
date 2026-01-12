@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { Modal } from "@/components/ui/Modal";
 import { Button } from "@/components/ui/Button";
-import { AlertCircle, ArrowUpRight, ArrowDownLeft, Wallet, ShieldCheck } from "lucide-react";
+import { AlertCircle, ArrowUpRight, ArrowDownLeft, Wallet, ShieldCheck, CreditCard, ChevronRight } from "lucide-react";
+import Link from "next/link";
 import api from "@/lib/api";
 import { useStore } from "@/store/useStore";
 import { useTranslations } from "next-intl";
@@ -109,6 +110,7 @@ interface WithdrawModalProps {
 }
 
 export function WithdrawModal({ isOpen, onClose, balance }: WithdrawModalProps) {
+    const { wallet } = useStore();
     const t = useTranslations("Wallet");
     const tCommon = useTranslations("Common");
     const [amount, setAmount] = useState("");
@@ -128,6 +130,11 @@ export function WithdrawModal({ isOpen, onClose, balance }: WithdrawModalProps) 
             return;
         }
 
+        if (numAmount < 5000) {
+            setError(t('minWithdrawalError', { amount: '5,000' }));
+            return;
+        }
+
         setLoading(true);
         setError("");
         try {
@@ -143,7 +150,8 @@ export function WithdrawModal({ isOpen, onClose, balance }: WithdrawModalProps) 
                 }, 2000);
             }
         } catch (err: any) {
-            setError(err.response?.data?.message || t('withdrawError'));
+            const message = err.response?.data?.message || err.response?.data?.error || t('withdrawError');
+            setError(message);
         } finally {
             setLoading(false);
         }
@@ -160,6 +168,26 @@ export function WithdrawModal({ isOpen, onClose, balance }: WithdrawModalProps) 
                         <h4 className="text-lg font-bold text-gray-900">{t('withdrawRequested')}</h4>
                         <p className="text-sm text-gray-500">{t('withdrawSuccessDesc')}</p>
                     </div>
+                ) : !wallet?.bankAccounts || wallet.bankAccounts.length === 0 ? (
+                    <div className="p-6 bg-amber-50 rounded-2xl border border-amber-100/50 space-y-4 text-center">
+                        <div className="h-16 w-16 bg-white rounded-full flex items-center justify-center mx-auto shadow-sm">
+                            <CreditCard className="h-8 w-8 text-amber-600" />
+                        </div>
+                        <div className="space-y-2">
+                            <h4 className="text-lg font-bold text-gray-900">{t('noBankAccount')}</h4>
+                            <p className="text-sm text-gray-500 leading-relaxed px-4">
+                                {t('noBankAccountDesc')}
+                            </p>
+                        </div>
+                        <Link
+                            href="/dashboard/settings"
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-white text-amber-600 font-bold rounded-xl border-2 border-amber-100 hover:bg-amber-50 hover:border-amber-200 transition-all active:scale-95 group"
+                            onClick={onClose}
+                        >
+                            {t('goToSettings')}
+                            <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                    </div>
                 ) : (
                     <>
                         <div className="bg-amber-50 rounded-xl p-4 border border-amber-100 space-y-3">
@@ -171,13 +199,7 @@ export function WithdrawModal({ isOpen, onClose, balance }: WithdrawModalProps) 
                                 <span className="font-black text-amber-900 text-base">₦{balance.toLocaleString()}</span>
                             </div>
 
-                            {/* Show details if there are pending withdrawals */}
-                            {useStore.getState().wallet?.pendingWithdrawalBalance ? (
-                                <div className="pt-2 border-t border-amber-200/50 flex justify-between items-center text-[10px] text-amber-700 font-medium">
-                                    <span>{t('pendingWithdrawal')}</span>
-                                    <span>-₦{useStore.getState().wallet?.pendingWithdrawalBalance.toLocaleString()}</span>
-                                </div>
-                            ) : null}
+                            {/* Removed redundant pending deduction as it is already included in availableBalance virtual */}
                         </div>
 
                         {error && (

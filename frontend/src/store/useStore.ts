@@ -11,6 +11,14 @@ interface User {
     mode: string;
 }
 
+interface BankAccount {
+    _id: string;
+    bankName: string;
+    accountNumber: string;
+    accountName: string;
+    isDefault: boolean;
+}
+
 interface Wallet {
     balance: number;
     earningsBalance: number;
@@ -18,6 +26,7 @@ interface Wallet {
     pendingWithdrawalBalance: number;
     availableBalance: number;
     totalBalance: number;
+    bankAccounts: BankAccount[];
 }
 
 interface AppState {

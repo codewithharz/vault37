@@ -42,7 +42,7 @@ export function WalletCard() {
                             </Tooltip>
                         </div>
                         <p className="text-3xl font-black text-gray-900">
-                            ₦{((wallet?.balance ?? 0) - (wallet?.lockedBalance ?? 0)).toLocaleString()}
+                            ₦{(wallet?.availableBalance ?? 0).toLocaleString()}
                         </p>
                     </div>
 
@@ -63,19 +63,21 @@ export function WalletCard() {
                                     <Info className="h-3 w-3 text-gray-400 cursor-help" />
                                 </Tooltip>
                             </div>
-                            <span className="text-sm font-bold text-amber-600">₦{(wallet?.lockedBalance ?? 0).toLocaleString()}</span>
+                            <span className="text-sm font-bold text-amber-600">
+                                ₦{((wallet?.lockedBalance ?? 0) + (wallet?.pendingWithdrawalBalance ?? 0)).toLocaleString()}
+                            </span>
                         </div>
                     </div>
 
                     <div className="pt-2 border-t border-gray-100">
                         <span className="text-xs text-gray-400 flex justify-between">
                             <div className="flex items-center gap-1">
-                                <span>{t('balance')}:</span>
+                                <span>{t('totalBalance') || "Total Balance"}:</span>
                                 <Tooltip content={tTip('totalBalance')}>
                                     <Info className="h-3 w-3 text-gray-400 cursor-help" />
                                 </Tooltip>
                             </div>
-                            <span>₦{(wallet?.balance ?? 0).toLocaleString()}</span>
+                            <span>₦{(wallet?.totalBalance ?? 0).toLocaleString()}</span>
                         </span>
                     </div>
                 </div>

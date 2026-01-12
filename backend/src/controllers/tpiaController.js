@@ -171,12 +171,20 @@ export const getAdminTPIAs = asyncHandler(async (req, res, next) => {
 
     const total = await TPIA.countDocuments(query);
 
+    // Calculate total value of selected TPIAs
+    const totalValueResult = await TPIA.aggregate([
+        { $match: query },
+        { $group: { _id: null, total: { $sum: "$amount" } } }
+    ]);
+    const totalValue = totalValueResult.length > 0 ? totalValueResult[0].total : 0;
+
     res.status(200).json({
         success: true,
         data: {
             tpias,
             pagination: {
                 total,
+                totalValue,
                 page: Number(page),
                 pages: Math.ceil(total / limit)
             }

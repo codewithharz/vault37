@@ -9,6 +9,7 @@ import {
     creditWallet,
     debitWallet,
     calculateBalances,
+    lockBalanceForWithdrawal,
 } from '../services/walletService.js';
 
 /**
@@ -345,6 +346,44 @@ export const setDefaultBankAccount = asyncHandler(async (req, res, next) => {
         data: {
             bankAccount,
         },
+    });
+});
+
+/**
+ * @desc    Delete bank account
+ * @route   DELETE /api/wallet/bank-account/:id
+ * @access  Private
+ */
+export const deleteBankAccount = asyncHandler(async (req, res, next) => {
+    const { id } = req.params;
+
+    const wallet = await Wallet.findOne({ userId: req.user.id });
+
+    if (!wallet) {
+        return next(new AppError('Wallet not found', 404));
+    }
+
+    const bankAccount = wallet.bankAccounts.id(id);
+
+    if (!bankAccount) {
+        return next(new AppError('Bank account not found', 404));
+    }
+
+    const wasDefault = bankAccount.isDefault;
+
+    // Remove the account
+    wallet.bankAccounts.pull(id);
+
+    // If we deleted the default account, make another one default if available
+    if (wasDefault && wallet.bankAccounts.length > 0) {
+        wallet.bankAccounts[0].isDefault = true;
+    }
+
+    await wallet.save();
+
+    res.status(200).json({
+        success: true,
+        message: 'Bank account deleted successfully',
     });
 });
 

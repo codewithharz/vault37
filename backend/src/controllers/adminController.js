@@ -238,7 +238,13 @@ export const approveWithdrawal = asyncHandler(async (req, res, next) => {
     }
 
     // Complete withdrawal (permanent deduction from both pending and actual balance)
-    await walletService.completeWithdrawal(transaction.user, transaction.amount);
+    await walletService.completeWithdrawal(
+        transaction.user,
+        transaction.amount,
+        transaction.reference,
+        `Withdrawal approved: ${notes || 'No notes provided'}`,
+        { transactionId: transaction._id }
+    );
 
     // Update transaction
     transaction.status = 'completed';

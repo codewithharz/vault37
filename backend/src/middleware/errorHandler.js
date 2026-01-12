@@ -48,7 +48,8 @@ const errorHandler = (err, req, res, next) => {
     // Send error response
     res.status(error.statusCode).json({
         success: false,
-        error: error.message,
+        message: error.message,
+        error: error.message, // Maintain backward compatibility if needed
         ...(config.nodeEnv === 'development' && { stack: err.stack }),
     });
 };

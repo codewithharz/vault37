@@ -12,6 +12,12 @@ const commoditySchema = new mongoose.Schema(
             type: String,
             required: [true, 'Please provide a commodity type'],
         },
+        symbol: {
+            type: String,
+            required: [true, 'Please provide a commodity symbol (e.g. GOLD)'],
+            uppercase: true,
+            trim: true,
+        },
         icon: {
             type: String,
         },
