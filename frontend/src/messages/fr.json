@@ -1,0 +1,878 @@
+{
+    "Auth": {
+        "loginTitle": "Connexion Sécurisée",
+        "loginSubtitle": "Entrez vos identifiants pour accéder au tableau de bord",
+        "emailLabel": "Adresse Email",
+        "phoneLabel": "Numéro de Téléphone",
+        "passwordLabel": "Mot de passe",
+        "loginButton": "Se connecter",
+        "registerLink": "Pas de compte ? S'inscrire",
+        "registerTitle": "Créer un compte",
+        "registerSubtitle": "Rejoignez Vault37 aujourd'hui",
+        "nameLabel": "Nom Complet",
+        "roleLabel": "Type de compte",
+        "registerButton": "S'inscrire",
+        "creatingAccount": "Création de compte...",
+        "loginLink": "Vous avez déjà un compte ? Connectez-vous",
+        "logout": "Se déconnecter",
+        "error": "L'authentification a échoué"
+    },
+    "AdminTPIA": {
+        "title": "Gestion TPIA",
+        "description": "Surveillez et gérez les contrats d'investissement tiers (TPIA).",
+        "statsLabel": "Total des TPIAs actifs: {total}",
+        "tabs": {
+            "all": "Tous les TPIAs",
+            "pending": "En attente d'approbation",
+            "active": "Actifs",
+            "matured": "Arrivé à échéance",
+            "completed": "Terminés",
+            "cancelled": "Annulés"
+        },
+        "loading": "Chargement des TPIAs...",
+        "noData": "Aucun TPIA trouvé pour ce filtre.",
+        "table": {
+            "tpiaGdc": "TPIA / GDC",
+            "investor": "Investisseur",
+            "investment": "Investissement",
+            "cycleMode": "Mode de Cycle",
+            "timeline": "Chronologie",
+            "status": "Statut",
+            "actions": "Actions"
+        },
+        "investmentDetails": {
+            "profit": "₦{amount} de profit",
+            "mode": "Mode {mode}"
+        },
+        "timelineLabels": {
+            "purchased": "Acheté le: {date}",
+            "matures": "Expire le: {date}"
+        },
+        "actions": {
+            "reject": "Rejeter",
+            "approve": "Approuver",
+            "viewDetails": "Voir les détails"
+        },
+        "pagination": {
+            "previous": "Précédent",
+            "next": "Suivant",
+            "pageInfo": "Page {page} sur {pages}"
+        },
+        "modals": {
+            "reject": {
+                "title": "Rejeter TPIA-{number}",
+                "description": "Veuillez fournir un motif de rejet. L'utilisateur sera notifié et les fonds remboursés immédiatement.",
+                "placeholder": "Motif du rejet...",
+                "confirm": "Confirmer le Rejet"
+            },
+            "details": {
+                "title": "Détails TPIA-{number}",
+                "status": "Statut",
+                "gdcCluster": "Cluster GDC",
+                "investmentAmount": "Montant de l'Investissement",
+                "expectedProfit": "Profit Attendu",
+                "cycleStartMode": "Mode de Début de Cycle",
+                "userMode": "Mode Utilisateur",
+                "timelineTitle": "Chronologie",
+                "purchasedText": "Acheté",
+                "approved": "Approuvé",
+                "maturesText": "Expire",
+                "approvedBy": "par {name}",
+                "policyNumber": "N° de Police: {number}"
+            }
+        },
+        "toasts": {
+            "loadFailed": "Échec du chargement des TPIAs",
+            "approveSuccess": "TPIA-{number} approuvé avec succès",
+            "approveFailed": "Échec de l'approbation du TPIA",
+            "rejectSuccess": "TPIA-{number} rejeté",
+            "rejectFailed": "Échec du rejet du TPIA"
+        },
+        "badges": {
+            "immediate": "⚡ IMMÉDIAT",
+            "cluster": "🔄 CLUSTER"
+        }
+    },
+    "AdminGDC": {
+        "title": "Gestion des GDC",
+        "description": "Surveiller et gérer les Global Distribution Clusters.",
+        "statsLabel": "Total GDCs: {total}",
+        "tabs": {
+            "all": "Tous les GDC",
+            "filling": "En cours",
+            "full": "Complet",
+            "active": "Actifs",
+            "completed": "Terminés"
+        },
+        "loading": "Chargement des GDCs...",
+        "noData": "Aucun GDC trouvé pour ce filtre.",
+        "table": {
+            "gdcNumber": "Numéro GDC",
+            "commodity": "Produit",
+            "fillStatus": "État de remplissage",
+            "cycleProgress": "Progression du cycle",
+            "status": "Statut",
+            "actions": "Actions"
+        },
+        "cycle": {
+            "progress": "Cycle {current}/{total}",
+            "next": "Prochain: {date}"
+        },
+        "fill": {
+            "label": "{current}/10 TPIAs"
+        },
+        "actions": {
+            "viewDetails": "Voir détails"
+        },
+        "modals": {
+            "details": {
+                "title": "Détails GDC-{number}",
+                "status": "Statut",
+                "gdcNumber": "Numéro GDC",
+                "currentFill": "Remplissage actuel",
+                "cycleProgress": "Progression du cycle",
+                "activated": "Activé",
+                "nextCycle": "Prochain cycle",
+                "linkedCommodity": "Produit associé",
+                "tpiasTitle": "TPIAs dans ce GDC ({count})",
+                "purchasedAt": "Acheté: {date}",
+                "approvedAt": "Approuvé: {date}"
+            }
+        },
+        "toasts": {
+            "loadFailed": "Échec du chargement des GDCs"
+        }
+    },
+    "AdminUsers": {
+        "title": "Gestion des Utilisateurs",
+        "description": "Voir et gérer tous les utilisateurs de la plateforme.",
+        "searchPlaceholder": "Rechercher par nom ou email...",
+        "filters": {
+            "kycStatus": "Tous les statuts KYC",
+            "roles": "Tous les rôles"
+        },
+        "table": {
+            "user": "Utilisateur",
+            "kycStatus": "Statut KYC",
+            "role": "Rôle",
+            "joined": "Rejoint",
+            "actions": "Actions"
+        },
+        "status": {
+            "verified": "Vérifié",
+            "pending": "En attente",
+            "rejected": "Rejeté",
+            "unverified": "Non vérifié",
+            "banned": "BANNI"
+        },
+        "roles": {
+            "user": "Utilisateur",
+            "admin": "Admin",
+            "auditor": "Auditeur"
+        },
+        "noData": "Aucun utilisateur trouvé correspondant à vos filtres.",
+        "actions": {
+            "manage": "Gérer"
+        },
+        "details": {
+            "title": "Détails de l'utilisateur",
+            "tabs": {
+                "overview": "Vue d'ensemble",
+                "financials": "Finances",
+                "actions": "Actions"
+            },
+            "sections": {
+                "address": "Informations d'adresse",
+                "account": "Détails du compte",
+                "recentTransactions": "Transactions récentes",
+                "investmentPortfolio": "Portefeuille d'investissement (TPIAs)",
+                "adminActions": "Actions administratives",
+                "dangerZone": "Zone de danger"
+            },
+            "labels": {
+                "street": "Rue",
+                "city": "Ville",
+                "state": "État",
+                "country": "Pays",
+                "mode": "Mode",
+                "referralCode": "Code de parrainage",
+                "role": "Rôle",
+                "status": "Statut",
+                "joined": "Rejoint",
+                "walletBalance": "Solde du portefeuille",
+                "totalEarnings": "Gains totaux",
+                "lockedFunds": "Fonds verrouillés (TPIAs)",
+                "accountStatus": "Statut du compte",
+                "kycStatus": "Statut KYC",
+                "platformRole": "Rôle de la plateforme",
+                "amount": "Montant",
+                "compounding": "Composé",
+                "invAmount": "Montant Inv.",
+                "type": "Type",
+                "date": "Date"
+            },
+            "status": {
+                "active": "Actif",
+                "inactive": "Inactif",
+                "banned": "BANNI",
+                "verified": "VÉRIFIÉ",
+                "pending": "EN ATTENTE",
+                "rejected": "REJETÉ"
+            },
+            "descriptions": {
+                "compounding": "Composé",
+                "payout": "Paiement",
+                "accessNormal": "L'utilisateur peut accéder à la plateforme normalement.",
+                "accessBanned": "L'utilisateur est actuellement banni et ne peut pas se connecter.",
+                "permissions": "Assigner les permissions système.",
+                "deleteWarning": "La suppression d'un utilisateur est permanente et irréversible. Toutes les données associées seront supprimées."
+            },
+            "actions": {
+                "ban": "Bannir l'utilisateur",
+                "activate": "Activer l'utilisateur",
+                "verify": "Vérifier l'utilisateur",
+                "reject": "Rejeter",
+                "changeRole": "Changer le rôle",
+                "delete": "Supprimer le compte",
+                "confirm": "Confirmer",
+                "cancel": "Annuler",
+                "forceDelete": "Suppression Forcée"
+            },
+            "modals": {
+                "banTitle": "Bannir l'utilisateur",
+                "activateTitle": "Activer l'utilisateur",
+                "banMessage": "Êtes-vous sûr de vouloir bannir {name} ? Ils perdront l'accès à la plateforme immédiatement.",
+                "activateMessage": "Êtes-vous sûr de vouloir activer {name} ? Ils retrouveront l'accès à la plateforme.",
+                "changeRoleTitle": "Changer le rôle",
+                "changeRoleMessage": "Êtes-vous sûr de vouloir changer le rôle de {name} de {oldRole} à {newRole} ? Cela mettra à jour leurs permissions.",
+                "verifyKycTitle": "Vérifier KYC",
+                "rejectKycTitle": "Rejeter KYC",
+                "verifyKycMessage": "Êtes-vous sûr de vouloir vérifier la demande KYC de cet utilisateur ?",
+                "rejectKycMessage": "Êtes-vous sûr de vouloir rejeter la demande KYC de cet utilisateur ?",
+                "deleteTitle": "Supprimer le compte",
+                "deleteMessage": "AVERTISSEMENT CRITIQUE: Êtes-vous sûr de vouloir SUPPRIMER {name} ? Cette action est PERMANENTE et irréversible.",
+                "forceDeleteDesc": "Ignorer les fonds actifs et les vérifications. Efface toutes les données utilisateur, y compris le portefeuille.",
+                "rejectionReason": "Rejeté par l'admin via modal"
+            },
+            "messages": {
+                "loadError": "Échec du chargement des détails",
+                "statusUpdateSuccess": "Utilisateur {status} avec succès",
+                "statusUpdateError": "Échec de la mise à jour du statut",
+                "roleUpdateSuccess": "Rôle mis à jour vers {role}",
+                "roleUpdateError": "Échec de la mise à jour du rôle",
+                "kycUpdateSuccess": "Statut KYC mis à jour vers {status}",
+                "kycUpdateError": "Échec de la mise à jour du statut KYC",
+                "deleteSuccess": "Utilisateur supprimé avec succès",
+                "deleteError": {
+                    "generic": "Échec de la suppression",
+                    "force": "❌ Échec: L'utilisateur a des fonds actifs. Cochez 'Suppression Forcée' pour contourner."
+                }
+            },
+            "noData": {
+                "transactions": "Aucune transaction récente trouvée.",
+                "investments": "Aucun investissement actif."
+            }
+        }
+    },
+    "AdminWallet": {
+        "title": "Gestion du Portefeuille",
+        "description": "Surveiller et gérer les dépôts et retraits de la plateforme.",
+        "pendingCount": "En attente: {count}",
+        "tabs": {
+            "deposits": "Dépôts en attente",
+            "withdrawals": "Retraits en attente",
+            "transactions": "Toutes les transactions",
+            "statistics": "Statistiques"
+        },
+        "status": {
+            "pending": "En attente",
+            "completed": "Terminé",
+            "cancelled": "Annulé",
+            "failed": "Échoué"
+        },
+        "transactionTypes": {
+            "deposit": "Dépôt",
+            "withdrawal": "Retrait",
+            "tpia_purchase": "Investissement",
+            "cycle_profit": "Profit"
+        },
+        "table": {
+            "reference": "Référence",
+            "user": "Utilisateur",
+            "amount": "Montant",
+            "date": "Date",
+            "paymentMethod": "Méthode de paiement",
+            "status": "Statut",
+            "actions": "Actions",
+            "bankAccount": "Compte bancaire",
+            "type": "Type"
+        },
+        "noData": {
+            "deposits": "Aucun dépôt en attente",
+            "withdrawals": "Aucun retrait en attente",
+            "transactions": "Aucune transaction trouvée"
+        },
+        "filters": {
+            "allTypes": "Tous les types",
+            "allStatuses": "Tous les statuts",
+            "searchPlaceholder": "Rechercher par référence...",
+            "exportCsv": "Exporter CSV"
+        },
+        "stats": {
+            "totalDeposits": "Total Dépôts (Succès)",
+            "totalWithdrawals": "Total Retraits (Succès)",
+            "tvl": "TVL Plateforme",
+            "lockedFunds": "Investissements Actifs",
+            "userBalances": "Soldes Utilisateurs",
+            "userEarnings": "Gains Utilisateurs",
+            "profitDistributed": "Bénéfices Distribués",
+            "pendingActions": "Actions en Attente",
+            "transactions": "{count} transactions",
+            "tvlDesc": "Valeur Totale Verrouillée",
+            "lockedFundsDesc": "Dans les cycles d'échange",
+            "performance": "Performance Plateforme",
+            "estArbitrage": "Arbitrage Estimé (12.5%)",
+            "grossRevenue": "Revenu Brut Est.",
+            "netProfit": "Bénéfice Net Est.",
+            "tradingYield": "Rendement de Trading",
+            "allGdcs": "Sur tous les GDCs",
+            "bottomLine": "Résultat Net",
+            "afterPayouts": "Après Paiements Investisseurs",
+            "otherIncome": "Autres Revenus",
+            "penaltyRevenue": "Revenu des Pénalités (Réel)",
+            "combinedEarnings": "Gains Combinés Plateforme"
+        },
+        "modals": {
+            "approve": {
+                "title": "Approuver {type}",
+                "description": "Vous êtes sur le point d'approuver ce {type}.",
+                "depositNote": "Le portefeuille de l'utilisateur sera crédité immédiatement.",
+                "withdrawalNote": "Le portefeuille de l'utilisateur sera débité et les fonds transférés.",
+                "notesLabel": "Notes d'approbation (Optionnel)",
+                "notesPlaceholder": "Ajouter des notes sur cette approbation...",
+                "confirm": "Confirmer l'approbation"
+            },
+            "reject": {
+                "title": "Rejeter {type}",
+                "description": "Veuillez fournir un motif de rejet. L'utilisateur sera notifié.",
+                "reasonPlaceholder": "Motif du rejet...",
+                "confirm": "Confirmer le Rejet"
+            },
+            "details": {
+                "title": "Détails de la Transaction",
+                "reference": "Référence",
+                "status": "Statut",
+                "type": "Type",
+                "amount": "Montant",
+                "investor": "Investisseur",
+                "email": "Email",
+                "date": "Date",
+                "method": "Méthode de Paiement",
+                "bankDetails": "Détails Bancaires",
+                "rejectionReason": "Motif du Rejet",
+                "adminNotes": "Notes Admin",
+                "close": "Fermer les détails"
+            }
+        },
+        "messages": {
+            "loadFailed": "Échec du chargement des données",
+            "approveSuccess": "{type} approuvé avec succès",
+            "approveFailed": "Échec de l'approbation de la transaction",
+            "rejectSuccess": "{type} rejeté",
+            "rejectFailed": "Échec du rejet de la transaction"
+        }
+    },
+    "AdminApprovals": {
+        "title": "Centre d'Approbations",
+        "description": "Examiner et traiter les demandes en attente de la plateforme.",
+        "tabs": {
+            "deposits": "Dépôts",
+            "withdrawals": "Retraits",
+            "kyc": "Demandes KYC"
+        },
+        "noData": {
+            "deposits": "Tout est propre ! Aucun dépôt en attente.",
+            "withdrawals": "Tout est propre ! Aucun retrait en attente.",
+            "kyc": "Tout est propre ! Aucun examen KYC en attente."
+        },
+        "table": {
+            "user": "Utilisateur",
+            "amount": "Montant",
+            "reference": "Référence",
+            "actions": "Actions",
+            "bankDetails": "Détails Bancaires",
+            "document": "Document",
+            "submitted": "Soumis",
+            "viewId": "Voir l'ID"
+        },
+        "kyc": {
+            "idType": "Type d'ID",
+            "idNumber": "Numéro d'ID",
+            "submittedAt": "Soumis le"
+        },
+        "modals": {
+            "reject": {
+                "title": "Rejeter {type}",
+                "description": "Veuillez fournir un motif de rejet. Celui-ci sera envoyé à l'utilisateur.",
+                "reasonPlaceholder": "Motif du rejet...",
+                "confirm": "Confirmer le Rejet"
+            },
+            "documentPreview": {
+                "title": "Aperçu du Document",
+                "openOriginal": "Ouvrir l'original"
+            }
+        },
+        "messages": {
+            "loadFailed": "Échec du chargement des demandes en attente",
+            "approveSuccess": "{type} approuvé avec succès",
+            "approveFailed": "Échec de l'approbation de {type}",
+            "rejectSuccess": "{type} rejeté",
+            "rejectFailed": "Échec du rejet de {type}"
+        }
+    },
+    "AdminReports": {
+        "title": "Rapports Financiers",
+        "description": "Analysez les performances de la plateforme et téléchargez des données CSV détaillées.",
+        "types": {
+            "transaction_summary": {
+                "name": "Résumé des Transactions",
+                "description": "Vue agrégée des dépôts, retraits et bénéfices."
+            },
+            "profit_distribution": {
+                "name": "Distribution des Profits",
+                "description": "Tendances quotidiennes/mensuelles des paiements aux investisseurs."
+            },
+            "user_acquisition": {
+                "name": "Acquisition d'Utilisateurs",
+                "description": "Tendances d'inscription et taux de vérification KYC."
+            },
+            "tpia_sales": {
+                "name": "Ventes TPIA par Produit",
+                "description": "Performance et volume par actif de base."
+            }
+        },
+        "buttons": {
+            "export": "Exporter CSV",
+            "exporting": "Exportation...",
+            "refresh": "Actualiser",
+            "generating": "Génération...",
+            "contact": "Contact Développeur"
+        },
+        "settings": {
+            "title": "Paramètres du Rapport",
+            "type": "Type de Rapport",
+            "dateRange": "Période",
+            "startDate": "Date de Début",
+            "endDate": "Date de Fin",
+            "customReports": "Besoin de rapports personnalisés ?",
+            "customDesc": "L'export détaillé inclut tous les champs disponibles. Contactez l'admin pour un accès JSON brut."
+        },
+        "table": {
+            "type": "Type",
+            "count": "Total",
+            "totalAmount": "Montant Total",
+            "successful": "Réussi",
+            "pending": "En Attente",
+            "date": "Date",
+            "newUsers": "Nouveaux Utilisateurs",
+            "verifiedKyc": "KYC Vérifiés",
+            "totalDistributed": "Total Distribué",
+            "payoutCount": "Nombre de Paiements",
+            "commodity": "Produit",
+            "unitsSold": "Unités Vendues",
+            "totalRevenue": "Revenu Total"
+        },
+        "insights": {
+            "totalImpact": "Impact Total",
+            "summary": "Résumé des résultats actuels",
+            "recordCount": "Nombre d'Enregistrements",
+            "rows": "{count} Lignes",
+            "download": "Télécharger pour détails complets"
+        },
+        "placeholders": {
+            "noData": "Aucune donnée trouvée pour les critères sélectionnés.",
+            "calculating": "Calcul des métriques..."
+        },
+        "messages": {
+            "generateSuccess": "Rapport généré avec succès",
+            "generateError": "Échec de la génération du rapport",
+            "exportSuccess": "CSV exporté avec succès",
+            "exportError": "Échec de l'exportation"
+        }
+    },
+    "AdminSettings": {
+        "title": "Paramètres de la Plateforme",
+        "description": "Configurez les paramètres globaux, l'économie et les règles d'investissement.",
+        "sections": {
+            "tpia": {
+                "title": "Paramètres d'Investissement TPIA",
+                "description": "Règles de base pour l'Actif d'Investissement à Position Tokenisée."
+            },
+            "lifecycle": {
+                "title": "Cycle de Vie et Logique",
+                "description": "Configurer les étapes et comportements automatisés des investissements."
+            },
+            "economics": {
+                "title": "Économie de la Plateforme"
+            },
+            "penalties": {
+                "title": "Pénalités de Sortie Anticipée",
+                "caution": "ATTENTION : La modification de ces paramètres affecte immédiatement les remboursements de sortie anticipée. Les pénalités sont déduites du principal."
+            }
+        },
+        "form": {
+            "investmentAmount": "Montant d'Investissement (₦)",
+            "profitAmount": "Profit par Cycle (₦)",
+            "cycleDuration": "Durée du Cycle (Jours)",
+            "exitWindowInterval": "Fréquence de Fenêtre de Sortie (Cycles)",
+            "coreCycles": "Cycles Principaux (Verrouillage)",
+            "extendedCycles": "Cycles Étendus (Optionnel)",
+            "approvalWindowMax": "Fenêtre d'Approbation Max (Min)",
+            "monthlyMargin": "Marge d'Arbitrage Mensuelle (%)",
+            "gdcClusterSize": "Taille du Cluster GDC",
+            "cycleLabel": "Cycle {cycle} :",
+            "autoApprove": {
+                "label": "Approbation Auto",
+                "desc": "Approuver TPIAs automatiquement après la fenêtre"
+            },
+            "marginInfo": "Cette marge est utilisée pour estimer le revenu brut de la plateforme dans le tableau de bord. Elle représente la performance réelle de trading avant les paiements aux investisseurs."
+        },
+        "securityModal": {
+            "title": "Vérification de Sécurité",
+            "heading": "Action à Haut Risque Requise",
+            "subheading": "Vous êtes sur le point de modifier des paramètres critiques de la plateforme. Cette action sera auditée.",
+            "reasonLabel": "Raison du Changement",
+            "reasonPlaceholder": "ex: Ajustement du profit TPIA pour correspondre au marché...",
+            "passwordLabel": "Mot de Passe Admin",
+            "passwordPlaceholder": "••••••••",
+            "confirmLabel": "Confirmer l'Action",
+            "typeConfirm": "Tapez CONFIRM",
+            "confirmPlaceholder": "Tapez CONFIRM ici",
+            "authorize": "Autoriser et Exécuter",
+            "cancel": "Annuler"
+        },
+        "buttons": {
+            "reset": "Rétablir les Défauts",
+            "save": "Enregistrer les Changements",
+            "saving": "Enregistrement..."
+        },
+        "messages": {
+            "loadError": "Échec du chargement des paramètres système",
+            "passwordRequired": "Le mot de passe est requis",
+            "reasonRequired": "Veuillez fournir une raison plus détaillée (min 10 car.)",
+            "confirmRequired": "Veuillez taper 'CONFIRM' exactement pour procéder",
+            "saveSuccess": "Paramètres mis à jour avec succès",
+            "saveError": "Échec de la mise à jour des paramètres",
+            "resetSuccess": "Paramètres rétablis aux valeurs par défaut",
+            "resetError": "Échec du rétablissement des paramètres",
+            "resetConfirm": "Êtes-vous sûr de vouloir réinitialiser tous les paramètres aux défauts du système ? Cette action est irréversible."
+        }
+    },
+    "UserMenu": {
+        "profile": "Mon Profil",
+        "settings": "Paramètres du Compte",
+        "logout": "Se déconnecter"
+    },
+    "Navigation": {
+        "overview": "Vue d'ensemble",
+        "portfolio": "Mon Portefeuille",
+        "market": "Marché",
+        "wallet": "Portefeuille",
+        "growth": "Croissance",
+        "history": "Historique",
+        "settings": "Paramètres"
+    },
+    "AdminNavigation": {
+        "dashboard": "Tableau de Bord",
+        "tpia": "TPIAs",
+        "gdc": "GDCs",
+        "approvals": "Approbations",
+        "wallet": "Portefeuille",
+        "users": "Utilisateurs",
+        "reports": "Rapports",
+        "settings": "Paramètres",
+        "admin": "Admin"
+    },
+    "Dashboard": {
+        "title": "Tableau de Bord Admin",
+        "welcome": "Bienvenue sur votre tableau de bord.",
+        "adminWelcome": "Bienvenue sur votre tableau de bord admin. Surveillez les performances de la plateforme et gérez votre marché.",
+        "subtitle": "Surveillez vos actifs et vos performances commerciales.",
+        "userWelcome": "Bon retour, {name} !",
+        "userSubtitle": "Voici les performances de votre portefeuille aujourd'hui.",
+        "lastUpdated": "Dernière mise à jour",
+        "overview": "Vue d'ensemble",
+        "analytics": "Analytique",
+        "quickActions": "Actions Rapides",
+        "recentActivity": "Activité Récente",
+        "systemStatus": "État du Système",
+        "loading": "Chargement du tableau de bord...",
+        "updating": "Mise à jour...",
+        "live": "En direct",
+        "manageUsers": "Gérer les Utilisateurs",
+        "viewUserBase": "Voir la base d'utilisateurs",
+        "approvalsCenter": "Centre d'Approbations",
+        "kycTransactions": "KYC et Transactions",
+        "tpiaManagement": "Gestion TPIA",
+        "monitorInvestments": "Surveiller les Investissements",
+        "gdcManagement": "Gestion GDC",
+        "monitorClusters": "Surveiller les Clusters",
+        "walletManagement": "Gestion du Portefeuille",
+        "approveTransactions": "Approuver les Transactions",
+        "financialReports": "Rapports Financiers",
+        "analyticsExports": "Analytique et Exportations"
+    },
+    "Header": {
+        "welcome": "Bon retour, {name}",
+        "myDashboard": "Mon Tableau de Bord",
+        "modeActive": "Mode {mode} Actif",
+        "searchPlaceholder": "Rechercher des actifs...",
+        "deposit": "Dépôt"
+    },
+    "Common": {
+        "loading": "Chargement...",
+        "error": "Une erreur est survenue",
+        "viewAll": "Voir tout",
+        "close": "Fermer",
+        "cancel": "Annuler",
+        "approve": "Approuver",
+        "reject": "Rejeter",
+        "active": "Actif",
+        "processing": "Traitement",
+        "pagination": {
+            "previous": "Précédent",
+            "next": "Suivant",
+            "pageInfo": "Page {page} sur {pages}"
+        }
+    },
+    "Status": {
+        "operational": "Opérationnel",
+        "checking": "Vérification...",
+        "issue": "Problème Détecté",
+        "degraded": "Dégradé",
+        "systemStatus": "État du Système",
+        "apiGateway": "Passerelle API",
+        "databaseCluster": "Cluster de Base de Données",
+        "paymentProcessing": "Traitement des Paiements",
+        "emailService": "Service Email"
+    },
+    "AdminMetrics": {
+        "totalUsers": "Utilisateurs Totaux",
+        "platformWide": "Plateforme Entière",
+        "tvl": "Valeur Totale Bloquée",
+        "allAssets": "Tous les Actifs",
+        "activeTPIAs": "TPIAs Actifs",
+        "runningCycles": "Cycles en cours",
+        "totalInvested": "Total Investi",
+        "cumulative": "Cumulatif"
+    },
+    "AdminActivity": {
+        "title": "Activité Récente",
+        "noActivity": "Aucune activité récente trouvée",
+        "newUserRegistration": "Nouvelle Inscription Utilisateur",
+        "depositReceived": "Dépôt Reçu",
+        "withdrawalRequest": "Demande de Retrait",
+        "tpiaPurchase": "Achat TPIA",
+        "justNow": "À l'instant",
+        "minutesAgo": "Il y a {minutes}m",
+        "hoursAgo": "Il y a {hours}h",
+        "joinedPlatform": "{name} a rejoint la plateforme",
+        "depositedAmount": "{name} a déposé ₦{amount}",
+        "requestedWithdrawal": "{name} a demandé un retrait de ₦{amount}",
+        "boughtCommodity": "{name} a acheté {title}",
+        "activityDetails": "Détails de l'Activité",
+        "details": {
+            "fullName": "Nom Complet",
+            "email": "Adresse Email",
+            "phone": "Numéro de Téléphone",
+            "kycStatus": "Statut KYC",
+            "user": "Utilisateur",
+            "amount": "Montant",
+            "reference": "Référence",
+            "status": "Statut",
+            "provider": "Fournisseur",
+            "commodity": "Produit",
+            "investment": "Investissement",
+            "orderNumber": "N° de Commande"
+        }
+    },
+    "Marketplace": {
+        "title": "Marché",
+        "subtitle": "Découvrez et investissez dans des produits performants.",
+        "purchase": "Acheter TPIA",
+        "currentPrice": "Prix actuel",
+        "investNow": "Investir maintenant",
+        "noCommodities": "Aucun produit actif disponible pour le moment.",
+        "nav": "VNI",
+        "perUnit": "par unité",
+        "cluster": "Cluster (Standard)",
+        "immediate": "Immédiat (Rapide)"
+    },
+    "Wallet": {
+        "title": "Mon Portefeuille",
+        "subtitle": "Gerez vos fonds, dépôts et retraits.",
+        "balance": "Solde Total",
+        "walletBalance": "Solde du Portefeuille",
+        "earnings": "Gains",
+        "deposit": "Dépôt",
+        "withdraw": "Retrait",
+        "depositFunds": "Déposer des fonds",
+        "withdrawFunds": "Retirer des fonds",
+        "transactions": "Transactions Récentes",
+        "noTransactions": "Aucune transaction trouvée.",
+        "amount": "Montant",
+        "type": "Type",
+        "status": "Statut",
+        "date": "Date",
+        "reference": "Référence",
+        "invalidAmount": "Veuillez entrer un montant valide.",
+        "depositError": "Impossible d'initialiser le dépôt. Veuillez réessayer.",
+        "depositHelp": "Les dépôts sont traités en toute sécurité via Paystack. Les fonds seront crédités sur votre portefeuille une fois la transaction réussie.",
+        "proceedToPayment": "Procéder au paiement",
+        "insufficientBalance": "Solde insuffisant.",
+        "withdrawError": "Échec du retrait.",
+        "withdrawRequested": "Retrait demandé !",
+        "withdrawSuccessDesc": "Votre demande de retrait est en cours de traitement et sera créditée sur votre compte bancaire lié sous peu.",
+        "availableBalance": "Solde disponible",
+        "amountToWithdraw": "Montant à retirer",
+        "confirmWithdrawal": "Confirmer le retrait",
+        "lockedBalance": "Solde Verrouillé"
+    },
+    "Portfolio": {
+        "title": "Mon Portefeuille",
+        "subtitle": "Suivez vos investissements actifs et vos cycles de trading.",
+        "totalValue": "Valeur Totale du Portefeuille",
+        "allTimeReturn": "Rendement total",
+        "totalProfit": "Bénéfice Total",
+        "activeTPIAs": "TPIAs Actifs",
+        "noTPIAs": "Vous n'avez pas encore d'investissements actifs.",
+        "noActiveTPIAs": "Aucun TPIA actif trouvé. Commencez à investir aujourd'hui !",
+        "details": "Voir Détails",
+        "id": "ID TPIA",
+        "commodity": "Produit",
+        "value": "Valeur Actuelle",
+        "progress": "Progression",
+        "history": "Historique des Cycles",
+        "cycleNumber": "Cycle n°",
+        "return": "Rendement",
+        "date": "Date",
+        "mode": "Mode",
+        "phase": "Phase",
+        "core": "Phase Initiale",
+        "extended": "Phase Prolongée",
+        "maturity": "Date d'Échéance",
+        "totalInvested": "Total Investi"
+    },
+    "History": {
+        "title": "Historique Unifié",
+        "subtitle": "Un journal détaillé de toutes vos activités financières et commerciales.",
+        "logTitle": "Journal des Transactions",
+        "activity": "Activité",
+        "reference": "Référence",
+        "amount": "Montant",
+        "status": "Statut",
+        "timestamp": "Horodatage",
+        "allActivities": "Toutes les Activités",
+        "deposits": "Dépôts",
+        "withdrawals": "Retraits",
+        "investments": "Investissements",
+        "maturityReturns": "Rendements à l'Échéance",
+        "export": "Exporter",
+        "noRecords": "Aucun enregistrement de transaction trouvé pour le filtre sélectionné.",
+        "systemActivity": "Activité du Système",
+        "loading": "Chargement de l'historique..."
+    },
+    "Growth": {
+        "title": "Croissance et Analytique",
+        "subtitle": "Visualisez les performances de votre portefeuille et les rendements projetés.",
+        "portfolioGrowth": "Croissance du Portefeuille",
+        "earningsByCommodity": "Gains par Produit",
+        "projectedReturns": "Rendements Projetés",
+        "calculator": "Calculateur de Gains",
+        "estimatedValue": "Valeur Future Estimée",
+        "monthlyGrowth": "Tendance de Croissance",
+        "noChartData": "Aucune donnée historique disponible pour le graphique.",
+        "allTime": "Tout le Temps",
+        "value": "Valeur",
+        "portfolioValue": "Valeur du Portefeuille",
+        "projectedProfitDesc": "Projeté sur la base des performances actuelles du GDC",
+        "calcNote": "*Les projections sont basées sur les tendances historiques de la VNI et ne sont pas des rendements garantis.",
+        "next30": "Prochains 30 Jours",
+        "next90": "Prochains 90 Jours",
+        "yearly": "Estimation Annuelle",
+        "loading": "Chargement de l'analyse..."
+    },
+    "Settings": {
+        "title": "Paramètres du Compte",
+        "investor": "Investisseur",
+        "subtitle": "Gérez votre profil, votre sécurité et votre statut de vérification.",
+        "kyc": "Vérification d'Identité (KYC)",
+        "verified": "Compte Vérifié",
+        "verifiedDesc": "Votre identité a été vérifiée avec succès. Vous avez un accès complet à toutes les fonctionnalités de la plateforme.",
+        "unverified": "Vérification Requise",
+        "verificationDesc": "Veuillez compléter votre vérification KYC pour augmenter vos limites de retrait et débloquer des produits premium.",
+        "uploadDoc": "Télécharger un Document d'Identité",
+        "uploadLimit": "NIN, carte d'électeur ou passeport international (Max 5Mo)",
+        "profileInfo": "Informations du Profil",
+        "fullName": "Nom Complet",
+        "email": "Adresse Email",
+        "saveChanges": "Enregistrer les Modifications",
+        "selectFiles": "Sélectionner des fichiers",
+        "loading": "Chargement des paramètres...",
+        "profile": "Profil",
+        "security": "Sécurité",
+        "notifications": "Notifications",
+        "billing": "Facturation"
+    },
+    "Sidebar": {
+        "helpTitle": "Besoin d'aide ?",
+        "helpDesc": "Contactez notre équipe d'assistance pour toute question concernant vos investissements."
+    },
+    "Tooltips": {
+        "totalValue": "Valeur marchande actuelle de tous vos investissements actifs plus les bénéfices accumulés.",
+        "totalInvested": "Le montant total du capital que vous avez engagé dans les TPIAs.",
+        "totalProfit": "Le total des gains générés par vos cycles terminés et actifs.",
+        "availableBalance": "Fonds actuellement disponibles dans votre portefeuille pour un retrait immédiat ou de nouveaux investissements.",
+        "earnings": "Bénéfices accumulés sur vos investissements qui n'ont pas encore été transférés vers votre solde principal.",
+        "lockedBalance": "Capital actuellement immobilisé dans des TPIAs actifs.",
+        "totalBalance": "La somme de votre solde disponible, de vos gains et de vos fonds verrouillés."
+    },
+    "Referral": {
+        "title": "Parrainer et Grandir",
+        "code": "Votre Code de Parrainage",
+        "copy": "Copier",
+        "copied": "Copié !",
+        "earningsMode": "Mode de Gains",
+        "switchMode": "Changer de Mode"
+    },
+    "Security": {
+        "title": "Sécurité du Compte",
+        "kycStatus": "Statut KYC",
+        "verified": "Vérifié",
+        "pending": "En attente",
+        "notStarted": "Action Requise",
+        "activity": "Activité Récente",
+        "lastLogin": "Dernière Connexion",
+        "profileUpdate": "Profil Mis à Jour",
+        "bankLinked": "Compte Bancaire Lié"
+    },
+    "Maturity": {
+        "title": "Compte à Rebours",
+        "nextCycle": "Prochain Cycle",
+        "maturity": "Maturité Finale",
+        "days": "Jours",
+        "hours": "Heures",
+        "viewPortfolio": "Voir Portfolio",
+        "active": "Compte à rebours actif",
+        "noActive": "Aucun cycle actif"
+    },
+    "Success": {
+        "paymentTitle": "Paiement Réussi !",
+        "paymentDesc": "Votre portefeuille a été crédité avec succès. Les fonds sont maintenant disponibles pour l'investissement.",
+        "amount": "Montant Crédité",
+        "reference": "Référence de Transaction",
+        "backToWallet": "Retour au Portefeuille",
+        "viewActivity": "Voir l'Activité",
+        "done": "Terminé"
+    }
+}

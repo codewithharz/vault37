@@ -1,0 +1,880 @@
+{
+    "Auth": {
+        "loginTitle": "Secure Login",
+        "loginSubtitle": "Enter your credentials to access the dashboard",
+        "emailLabel": "Email Address",
+        "phoneLabel": "Phone Number",
+        "passwordLabel": "Password",
+        "loginButton": "Sign In",
+        "registerLink": "Don't have an account? Register",
+        "registerTitle": "Create Account",
+        "registerSubtitle": "Join Vault37 today",
+        "nameLabel": "Full Name",
+        "confirmPasswordLabel": "Confirm Password",
+        "roleLabel": "Account Type",
+        "registerButton": "Register",
+        "creatingAccount": "Creating Account...",
+        "loginLink": "Already have an account? Sign In",
+        "logout": "Log Out",
+        "error": "Authentication failed"
+    },
+    "AdminTPIA": {
+        "title": "TPIA Management",
+        "description": "Monitor and manage Third Party Investment Agreements.",
+        "statsLabel": "Total Active TPIAs: {total}",
+        "tabs": {
+            "all": "All TPIAs",
+            "pending": "Pending Approval",
+            "active": "Active",
+            "matured": "Matured",
+            "completed": "Completed",
+            "cancelled": "Cancelled"
+        },
+        "loading": "Loading TPIAs...",
+        "noData": "No TPIAs found for this filter.",
+        "table": {
+            "tpiaGdc": "TPIA / GDC",
+            "investor": "Investor",
+            "investment": "Investment",
+            "cycleMode": "Cycle Mode",
+            "timeline": "Timeline",
+            "status": "Status",
+            "actions": "Actions"
+        },
+        "investmentDetails": {
+            "profit": "₦{amount} profit",
+            "mode": "{mode} Mode"
+        },
+        "timelineLabels": {
+            "purchased": "Purchased: {date}",
+            "matures": "Matures: {date}"
+        },
+        "actions": {
+            "reject": "Reject",
+            "approve": "Approve",
+            "viewDetails": "View Details"
+        },
+        "pagination": {
+            "previous": "Previous",
+            "next": "Next",
+            "pageInfo": "Page {page} of {pages}"
+        },
+        "modals": {
+            "reject": {
+                "title": "Reject TPIA-{number}",
+                "description": "Please provide a reason for rejection. The user will be notified and funds refunded immediately.",
+                "placeholder": "Reason for rejection...",
+                "confirm": "Confirm Rejection"
+            },
+            "details": {
+                "title": "TPIA-{number} Details",
+                "status": "Status",
+                "gdcCluster": "GDC Cluster",
+                "investmentAmount": "Investment Amount",
+                "expectedProfit": "Expected Profit",
+                "cycleStartMode": "Cycle Start Mode",
+                "userMode": "User Mode",
+                "timelineTitle": "Timeline",
+                "purchasedText": "Purchased",
+                "approved": "Approved",
+                "maturesText": "Matures",
+                "approvedBy": "by {name}",
+                "policyNumber": "Policy #: {number}"
+            }
+        },
+        "toasts": {
+            "loadFailed": "Failed to load TPIAs",
+            "approveSuccess": "TPIA-{number} approved successfully",
+            "approveFailed": "Failed to approve TPIA",
+            "rejectSuccess": "TPIA-{number} rejected",
+            "rejectFailed": "Failed to reject TPIA"
+        },
+        "badges": {
+            "immediate": "⚡ IMMEDIATE",
+            "cluster": "🔄 CLUSTER"
+        }
+    },
+    "AdminGDC": {
+        "title": "GDC Management",
+        "description": "Monitor and manage Global Distribution Clusters.",
+        "statsLabel": "Total GDCs: {total}",
+        "tabs": {
+            "all": "All GDCs",
+            "filling": "Filling",
+            "full": "Full",
+            "active": "Active",
+            "completed": "Completed"
+        },
+        "loading": "Loading GDCs...",
+        "noData": "No GDCs found for this filter.",
+        "table": {
+            "gdcNumber": "GDC Number",
+            "commodity": "Commodity",
+            "fillStatus": "Fill Status",
+            "cycleProgress": "Cycle Progress",
+            "status": "Status",
+            "actions": "Actions"
+        },
+        "cycle": {
+            "progress": "Cycle {current}/{total}",
+            "next": "Next: {date}"
+        },
+        "fill": {
+            "label": "{current}/10 TPIAs"
+        },
+        "actions": {
+            "viewDetails": "View Details"
+        },
+        "modals": {
+            "details": {
+                "title": "GDC-{number} Details",
+                "status": "Status",
+                "gdcNumber": "GDC Number",
+                "currentFill": "Current Fill",
+                "cycleProgress": "Cycle Progress",
+                "activated": "Activated",
+                "nextCycle": "Next Cycle",
+                "linkedCommodity": "Linked Commodity",
+                "tpiasTitle": "TPIAs in this GDC ({count})",
+                "purchasedAt": "Purchased: {date}",
+                "approvedAt": "Approved: {date}"
+            }
+        },
+        "toasts": {
+            "loadFailed": "Failed to load GDCs"
+        }
+    },
+    "AdminUsers": {
+        "title": "User Management",
+        "description": "View and manage all platform users.",
+        "searchPlaceholder": "Search by name or email...",
+        "filters": {
+            "kycStatus": "All KYC Status",
+            "roles": "All Roles"
+        },
+        "table": {
+            "user": "User",
+            "kycStatus": "KYC Status",
+            "role": "Role",
+            "joined": "Joined",
+            "actions": "Actions"
+        },
+        "status": {
+            "verified": "Verified",
+            "pending": "Pending",
+            "rejected": "Rejected",
+            "unverified": "Unverified",
+            "banned": "BANNED"
+        },
+        "roles": {
+            "user": "User",
+            "admin": "Admin",
+            "auditor": "Auditor"
+        },
+        "noData": "No users found matching your filters.",
+        "actions": {
+            "manage": "Manage"
+        },
+        "details": {
+            "title": "User Details",
+            "tabs": {
+                "overview": "Overview",
+                "financials": "Financials",
+                "actions": "Actions"
+            },
+            "sections": {
+                "address": "Address Information",
+                "account": "Account Details",
+                "recentTransactions": "Recent Transactions",
+                "investmentPortfolio": "Investment Portfolio (TPIAs)",
+                "adminActions": "Administrative Actions",
+                "dangerZone": "Danger Zone"
+            },
+            "labels": {
+                "street": "Street",
+                "city": "City",
+                "state": "State",
+                "country": "Country",
+                "mode": "Mode",
+                "referralCode": "Referral Code",
+                "role": "Role",
+                "status": "Status",
+                "joined": "Joined",
+                "walletBalance": "Wallet Balance",
+                "totalEarnings": "Total Earnings",
+                "lockedFunds": "Locked Funds (TPIAs)",
+                "accountStatus": "Account Status",
+                "kycStatus": "KYC Status",
+                "platformRole": "Platform Role",
+                "amount": "Amount",
+                "compounding": "Compounding",
+                "invAmount": "Inv. Amount",
+                "type": "Type",
+                "date": "Date"
+            },
+            "status": {
+                "active": "Active",
+                "inactive": "Inactive",
+                "banned": "BANNED",
+                "verified": "VERIFIED",
+                "pending": "PENDING",
+                "rejected": "REJECTED"
+            },
+            "descriptions": {
+                "compounding": "Compounding",
+                "payout": "Payout",
+                "accessNormal": "User can access the platform normally.",
+                "accessBanned": "User is currently banned and cannot log in.",
+                "permissions": "Assign system permissions.",
+                "deleteWarning": "Deleting a user is permanent and cannot be undone. All data associated with this user will be removed."
+            },
+            "actions": {
+                "ban": "Ban User",
+                "activate": "Activate User",
+                "verify": "Verify User",
+                "reject": "Reject",
+                "changeRole": "Change Role",
+                "delete": "Delete User Account",
+                "confirm": "Confirm",
+                "cancel": "Cancel",
+                "forceDelete": "Force Delete"
+            },
+            "modals": {
+                "banTitle": "Ban User",
+                "activateTitle": "Activate User",
+                "banMessage": "Are you sure you want to ban {name}? They will lose access to the platform immediately.",
+                "activateMessage": "Are you sure you want to activate {name}? They will regain access to the platform.",
+                "changeRoleTitle": "Change User Role",
+                "changeRoleMessage": "Are you sure you want to change {name}'s role from {oldRole} to {newRole}? This will update their permissions.",
+                "verifyKycTitle": "Verify KYC",
+                "rejectKycTitle": "Reject KYC",
+                "verifyKycMessage": "Are you sure you want to verify this user's KYC application?",
+                "rejectKycMessage": "Are you sure you want to reject this user's KYC application?",
+                "deleteTitle": "Delete User Account",
+                "deleteMessage": "CRITICAL WARNING: Are you sure you want to DELETE {name}? This action is PERMANENT and cannot be undone.",
+                "forceDeleteDesc": "Ignore active funds and checks. Wipes all user data including wallet.",
+                "rejectionReason": "Admin rejected via modal"
+            },
+            "messages": {
+                "loadError": "Failed to load user details",
+                "statusUpdateSuccess": "User {status} successfully",
+                "statusUpdateError": "Failed to update user status",
+                "roleUpdateSuccess": "User role updated to {role}",
+                "roleUpdateError": "Failed to update user role",
+                "kycUpdateSuccess": "KYC status updated to {status}",
+                "kycUpdateError": "Failed to update KYC status",
+                "deleteSuccess": "User deleted successfully",
+                "deleteError": {
+                    "generic": "Failed to delete user",
+                    "force": "❌ Failed: User has active funds. Check 'Force Delete' box to bypass."
+                }
+            },
+            "noData": {
+                "transactions": "No recent transactions found.",
+                "investments": "No active investments"
+            }
+        }
+    },
+    "AdminWallet": {
+        "title": "Wallet Management",
+        "description": "Monitor and manage platform deposits and withdrawals.",
+        "pendingCount": "Pending: {count}",
+        "tabs": {
+            "deposits": "Pending Deposits",
+            "withdrawals": "Pending Withdrawals",
+            "transactions": "All Transactions",
+            "statistics": "Statistics"
+        },
+        "status": {
+            "pending": "Pending",
+            "completed": "Completed",
+            "cancelled": "Cancelled",
+            "failed": "Failed"
+        },
+        "transactionTypes": {
+            "deposit": "Deposit",
+            "withdrawal": "Withdrawal",
+            "tpia_purchase": "Investment",
+            "cycle_profit": "Profit"
+        },
+        "table": {
+            "reference": "Reference",
+            "user": "User",
+            "amount": "Amount",
+            "date": "Date",
+            "paymentMethod": "Payment Method",
+            "status": "Status",
+            "actions": "Actions",
+            "bankAccount": "Bank Account",
+            "type": "Type"
+        },
+        "noData": {
+            "deposits": "No pending deposits",
+            "withdrawals": "No pending withdrawals",
+            "transactions": "No transactions found"
+        },
+        "filters": {
+            "allTypes": "All Types",
+            "allStatuses": "All Statuses",
+            "searchPlaceholder": "Search by reference...",
+            "exportCsv": "Export CSV"
+        },
+        "stats": {
+            "totalDeposits": "Total Deposits (Success)",
+            "totalWithdrawals": "Total Withdrawals (Success)",
+            "tvl": "Platform TVL",
+            "lockedFunds": "Active Investments",
+            "userBalances": "User Balances",
+            "userEarnings": "User Earnings",
+            "profitDistributed": "Profit Distributed",
+            "pendingActions": "Pending Actions",
+            "transactions": "{count} transactions",
+            "tvlDesc": "Total Value Locked",
+            "lockedFundsDesc": "In trade cycles",
+            "performance": "Platform Performance",
+            "estArbitrage": "Estimated Arbitrage (12.5%)",
+            "grossRevenue": "Est. Gross Revenue",
+            "netProfit": "Est. Net Profit",
+            "tradingYield": "Trading Yield",
+            "allGdcs": "Across all GDCs",
+            "bottomLine": "Bottom Line",
+            "afterPayouts": "After Investor Payouts",
+            "otherIncome": "Other Income",
+            "penaltyRevenue": "Penalty Revenue (Real)",
+            "combinedEarnings": "Combined Platform Earnings"
+        },
+        "modals": {
+            "approve": {
+                "title": "Approve {type}",
+                "description": "You are about to approve this {type}.",
+                "depositNote": "The user's wallet will be credited immediately.",
+                "withdrawalNote": "The user's wallet will be debited and funds transferred.",
+                "notesLabel": "Approval Notes (Optional)",
+                "notesPlaceholder": "Add any notes about this approval...",
+                "confirm": "Confirm Approval"
+            },
+            "reject": {
+                "title": "Reject {type}",
+                "description": "Please provide a reason for rejection. The user will be notified.",
+                "reasonPlaceholder": "Reason for rejection...",
+                "confirm": "Confirm Rejection"
+            },
+            "details": {
+                "title": "Transaction Details",
+                "reference": "Reference",
+                "status": "Status",
+                "type": "Type",
+                "amount": "Amount",
+                "investor": "Investor",
+                "email": "Email",
+                "date": "Date",
+                "method": "Payment Method",
+                "bankDetails": "Bank Details",
+                "rejectionReason": "Rejection Reason",
+                "adminNotes": "Admin Notes",
+                "close": "Close Details"
+            }
+        },
+        "messages": {
+            "loadFailed": "Failed to load data",
+            "approveSuccess": "{type} approved successfully",
+            "approveFailed": "Failed to approve transaction",
+            "rejectSuccess": "{type} rejected",
+            "rejectFailed": "Failed to reject transaction"
+        }
+    },
+    "AdminApprovals": {
+        "title": "Approvals Center",
+        "description": "Review and process pending platform requests.",
+        "tabs": {
+            "deposits": "Deposits",
+            "withdrawals": "Withdrawals",
+            "kyc": "KYC Requests"
+        },
+        "noData": {
+            "deposits": "All clean! No pending deposits.",
+            "withdrawals": "All clean! No pending withdrawals.",
+            "kyc": "All clean! No pending KYC reviews."
+        },
+        "table": {
+            "user": "User",
+            "amount": "Amount",
+            "reference": "Reference",
+            "actions": "Actions",
+            "bankDetails": "Bank Details",
+            "document": "Document",
+            "submitted": "Submitted",
+            "viewId": "View ID"
+        },
+        "kyc": {
+            "idType": "ID Type",
+            "idNumber": "ID Number",
+            "submittedAt": "Submitted At"
+        },
+        "modals": {
+            "reject": {
+                "title": "Reject {type}",
+                "description": "Please provide a reason for rejection. This will be sent to the user.",
+                "reasonPlaceholder": "Reason for rejection...",
+                "confirm": "Confirm Rejection"
+            },
+            "documentPreview": {
+                "title": "Document Preview",
+                "openOriginal": "Open original"
+            }
+        },
+        "messages": {
+            "loadFailed": "Failed to load pending requests",
+            "approveSuccess": "{type} approved successfully",
+            "approveFailed": "Failed to approve {type}",
+            "rejectSuccess": "{type} rejected",
+            "rejectFailed": "Failed to reject {type}"
+        }
+    },
+    "AdminReports": {
+        "title": "Financial Reports",
+        "description": "Analyze platform performance and download detailed CSV data.",
+        "types": {
+            "transaction_summary": {
+                "name": "Transaction Summary",
+                "description": "Aggregate view of deposits, withdrawals, and profits."
+            },
+            "profit_distribution": {
+                "name": "Profit Distribution",
+                "description": "Daily/Monthly trends of investor payouts."
+            },
+            "user_acquisition": {
+                "name": "User Acquisition",
+                "description": "Registration trends and KYC verification rates."
+            },
+            "tpia_sales": {
+                "name": "TPIA Sales by Commodity",
+                "description": "Performance and volume per commodity asset."
+            }
+        },
+        "buttons": {
+            "export": "Export CSV",
+            "exporting": "Exporting...",
+            "refresh": "Refresh Data",
+            "generating": "Generating...",
+            "contact": "Contact Developer"
+        },
+        "settings": {
+            "title": "Report Settings",
+            "type": "Report Type",
+            "dateRange": "Date Range",
+            "startDate": "Start Date",
+            "endDate": "End Date",
+            "customReports": "Need custom reports?",
+            "customDesc": "Detailed export includes all fields available in our database. Contact system admin for raw JSON access."
+        },
+        "table": {
+            "type": "Type",
+            "count": "Count",
+            "totalAmount": "Total Amount",
+            "successful": "Successful",
+            "pending": "Pending",
+            "date": "Date",
+            "newUsers": "New Users",
+            "verifiedKyc": "Verified KYC",
+            "totalDistributed": "Total Distributed",
+            "payoutCount": "Payout Count",
+            "commodity": "Commodity",
+            "unitsSold": "Units Sold",
+            "totalRevenue": "Total Revenue"
+        },
+        "insights": {
+            "totalImpact": "Total Impact",
+            "summary": "Summary of current results",
+            "recordCount": "Record Count",
+            "rows": "{count} Rows",
+            "download": "Download for full details"
+        },
+        "placeholders": {
+            "noData": "No data found for the selected criteria.",
+            "calculating": "Calculating metrics..."
+        },
+        "messages": {
+            "generateSuccess": "Report generated successfully",
+            "generateError": "Failed to generate report",
+            "exportSuccess": "CSV Exported successfully",
+            "exportError": "Export failed"
+        }
+    },
+    "AdminSettings": {
+        "title": "Platform Settings",
+        "description": "Configure global parameters, economics, and investment rules.",
+        "sections": {
+            "tpia": {
+                "title": "TPIA Investment Parameters",
+                "description": "Core rules for the Tokenized Position Investment Asset."
+            },
+            "lifecycle": {
+                "title": "Lifecycle & Logic",
+                "description": "Configure the stages and automated behaviors of investments."
+            },
+            "economics": {
+                "title": "Platform Economics"
+            },
+            "penalties": {
+                "title": "Early Exit Penalties",
+                "caution": "CAUTION: Changing these affects early exit refunds immediately. Penalties are deducted from the principal."
+            }
+        },
+        "form": {
+            "investmentAmount": "Investment Amount (₦)",
+            "profitAmount": "Profit Per Cycle (₦)",
+            "cycleDuration": "Cycle Duration (Days)",
+            "exitWindowInterval": "Exit Window Frequency (Cycles)",
+            "coreCycles": "Core Cycles (Lock-in)",
+            "extendedCycles": "Extended Cycles (Optional)",
+            "approvalWindowMax": "Max Approval Window (Min)",
+            "monthlyMargin": "Monthly Arbitrage Margin (%)",
+            "gdcClusterSize": "GDC Cluster Size",
+            "cycleLabel": "Cycle {cycle}:",
+            "autoApprove": {
+                "label": "Auto-Approval",
+                "desc": "Approve TPIAs automatically after window"
+            },
+            "marginInfo": "This margin is used to estimate gross platform revenue in the dashboard. It represents the actual trading performance before investor payouts."
+        },
+        "securityModal": {
+            "title": "Security Verification",
+            "heading": "High-Stakes Action Required",
+            "subheading": "You are about to modify critical platform parameters. This action will be audited.",
+            "reasonLabel": "Reason for Change",
+            "reasonPlaceholder": "e.g., Adjusting TPIA profit to match seasonal market performance...",
+            "passwordLabel": "Admin Password",
+            "passwordPlaceholder": "••••••••",
+            "confirmLabel": "Confirm Action",
+            "typeConfirm": "Type CONFIRM",
+            "confirmPlaceholder": "Type CONFIRM here",
+            "authorize": "Authorize & Execute",
+            "cancel": "Cancel"
+        },
+        "buttons": {
+            "reset": "Reset Defaults",
+            "save": "Save Changes",
+            "saving": "Saving..."
+        },
+        "messages": {
+            "loadError": "Failed to load system settings",
+            "passwordRequired": "Password is required",
+            "reasonRequired": "Please provide a more detailed reason (min 10 chars)",
+            "confirmRequired": "Please type 'CONFIRM' exactly to proceed",
+            "saveSuccess": "Settings updated successfully",
+            "saveError": "Failed to update settings",
+            "resetSuccess": "Settings reset to defaults",
+            "resetError": "Failed to reset settings",
+            "resetConfirm": "Are you sure you want to reset all settings to system defaults? This cannot be undone."
+        }
+    },
+    "UserMenu": {
+        "profile": "My Profile",
+        "settings": "Account Settings",
+        "logout": "Log Out"
+    },
+    "Navigation": {
+        "overview": "Overview",
+        "portfolio": "My Portfolio",
+        "market": "Marketplace",
+        "wallet": "Wallet",
+        "growth": "Growth",
+        "history": "History",
+        "settings": "Settings"
+    },
+    "AdminNavigation": {
+        "dashboard": "Dashboard",
+        "tpia": "TPIAs",
+        "gdc": "GDCs",
+        "approvals": "Approvals",
+        "wallet": "Wallet",
+        "users": "Users",
+        "reports": "Reports",
+        "settings": "Settings",
+        "admin": "Admin"
+    },
+    "Dashboard": {
+        "title": "Admin Dashboard",
+        "welcome": "Welcome to your dashboard.",
+        "adminWelcome": "Welcome to your admin dashboard. Monitor platform performance and manage your marketplace.",
+        "subtitle": "Monitor your assets and trade performance.",
+        "userWelcome": "Welcome back, {name}!",
+        "userSubtitle": "Here's how your portfolio is performing today.",
+        "lastUpdated": "Last updated",
+        "overview": "Overview",
+        "analytics": "Analytics",
+        "quickActions": "Quick Actions",
+        "recentActivity": "Recent Activity",
+        "systemStatus": "System Status",
+        "loading": "Loading Dashboard...",
+        "updating": "Updating...",
+        "live": "Live",
+        "manageUsers": "Manage Users",
+        "viewUserBase": "View user base",
+        "approvalsCenter": "Approvals Center",
+        "kycTransactions": "KYC & Transactions",
+        "tpiaManagement": "TPIA Management",
+        "monitorInvestments": "Monitor Investments",
+        "gdcManagement": "GDC Management",
+        "monitorClusters": "Monitor Clusters",
+        "walletManagement": "Wallet Management",
+        "approveTransactions": "Approve Transactions",
+        "financialReports": "Financial Reports",
+        "analyticsExports": "Analytics & Exports"
+    },
+    "Header": {
+        "welcome": "Welcome back, {name}",
+        "myDashboard": "My Dashboard",
+        "modeActive": "{mode} Mode Active",
+        "searchPlaceholder": "Search assets...",
+        "deposit": "Deposit"
+    },
+    "Common": {
+        "loading": "Loading...",
+        "error": "An error occurred",
+        "viewAll": "View All",
+        "close": "Close",
+        "cancel": "Cancel",
+        "approve": "Approve",
+        "reject": "Reject",
+        "active": "Active",
+        "processing": "Processing",
+        "pagination": {
+            "previous": "Previous",
+            "next": "Next",
+            "pageInfo": "Page {page} of {pages}"
+        }
+    },
+    "Status": {
+        "operational": "Operational",
+        "checking": "Checking...",
+        "issue": "Issue Detected",
+        "degraded": "Degraded",
+        "systemStatus": "System Status",
+        "apiGateway": "API Gateway",
+        "databaseCluster": "Database Cluster",
+        "paymentProcessing": "Payment Processing",
+        "emailService": "Email Service"
+    },
+    "AdminMetrics": {
+        "totalUsers": "Total Users",
+        "platformWide": "Platform Wide",
+        "tvl": "Total Value Locked",
+        "allAssets": "All Assets",
+        "activeTPIAs": "Active TPIAs",
+        "runningCycles": "Running Cycles",
+        "totalInvested": "Total Invested",
+        "cumulative": "Cumulative"
+    },
+    "AdminActivity": {
+        "title": "Recent Activity",
+        "noActivity": "No recent activity found",
+        "newUserRegistration": "New User Registration",
+        "depositReceived": "Deposit Received",
+        "withdrawalRequest": "Withdrawal Request",
+        "tpiaPurchase": "TPIA Purchase",
+        "justNow": "Just now",
+        "minutesAgo": "{minutes}m ago",
+        "hoursAgo": "{hours}h ago",
+        "joinedPlatform": "{name} joined the platform",
+        "depositedAmount": "{name} deposited ₦{amount}",
+        "requestedWithdrawal": "{name} requested withdrawal of ₦{amount}",
+        "boughtCommodity": "{name} bought {title}",
+        "activityDetails": "Activity Details",
+        "details": {
+            "fullName": "Full Name",
+            "email": "Email Address",
+            "phone": "Phone Number",
+            "kycStatus": "KYC Status",
+            "user": "User",
+            "amount": "Amount",
+            "reference": "Reference",
+            "status": "Status",
+            "provider": "Provider",
+            "commodity": "Commodity",
+            "investment": "Investment",
+            "orderNumber": "Order #"
+        }
+    },
+    "Marketplace": {
+        "title": "Marketplace",
+        "subtitle": "Discover and invest in high-performing commodities.",
+        "purchase": "Purchase TPIA",
+        "currentPrice": "Current Price",
+        "investNow": "Invest Now",
+        "noCommodities": "No active commodities available at the moment.",
+        "nav": "NAV",
+        "perUnit": "per unit",
+        "cluster": "Cluster (Standard)",
+        "immediate": "Immediate (Fast Start)"
+    },
+    "Wallet": {
+        "title": "My Wallet",
+        "subtitle": "Manage your funds, deposits, and withdrawals.",
+        "balance": "Total Balance",
+        "walletBalance": "Wallet Balance",
+        "earnings": "Earnings",
+        "deposit": "Deposit",
+        "withdraw": "Withdraw",
+        "depositFunds": "Deposit Funds",
+        "withdrawFunds": "Withdraw Funds",
+        "transactions": "Recent Transactions",
+        "noTransactions": "No transactions found.",
+        "amount": "Amount",
+        "type": "Type",
+        "status": "Status",
+        "date": "Date",
+        "reference": "Reference",
+        "invalidAmount": "Please enter a valid amount.",
+        "depositError": "Could not initialize deposit. Please try again.",
+        "depositHelp": "Deposits are securely processed via Paystack. Funds will be credited to your wallet once the transaction is successful.",
+        "proceedToPayment": "Proceed to Payment",
+        "insufficientBalance": "Insufficient balance.",
+        "withdrawError": "Withdrawal failed.",
+        "withdrawRequested": "Withdrawal Requested!",
+        "withdrawSuccessDesc": "Your withdrawal request is being processed and will be credited to your linked bank account shortly.",
+        "availableBalance": "Available Balance",
+        "amountToWithdraw": "Amount to Withdraw",
+        "confirmWithdrawal": "Confirm Withdrawal",
+        "lockedBalance": "Locked Balance"
+    },
+    "Portfolio": {
+        "title": "My Portfolio",
+        "subtitle": "Track your active investments and trade cycles.",
+        "totalValue": "Total Portfolio Value",
+        "allTimeReturn": "All time return",
+        "totalProfit": "Total Profit",
+        "activeTPIAs": "Active TPIAs",
+        "noTPIAs": "You have no active investments yet.",
+        "noActiveTPIAs": "No active TPIAs found. Start investing today!",
+        "details": "View Details",
+        "id": "TPIA ID",
+        "commodity": "Commodity",
+        "value": "Current Value",
+        "progress": "Progress",
+        "history": "Cycle History",
+        "cycleNumber": "Cycle #",
+        "return": "Return",
+        "date": "Date",
+        "mode": "Mode",
+        "phase": "Phase",
+        "core": "Core Phase",
+        "extended": "Extended Phase",
+        "maturity": "Maturity Date",
+        "totalInvested": "Total Invested"
+    },
+    "History": {
+        "title": "Unified History",
+        "subtitle": "A detailed log of all your financial and trade activities.",
+        "logTitle": "Transaction Log",
+        "activity": "Activity",
+        "reference": "Reference",
+        "amount": "Amount",
+        "status": "Status",
+        "timestamp": "Timestamp",
+        "allActivities": "All Activities",
+        "deposits": "Deposits",
+        "withdrawals": "Withdrawals",
+        "investments": "Investments",
+        "maturityReturns": "Maturity Returns",
+        "export": "Export",
+        "noRecords": "No transaction records found for the selected filter.",
+        "systemActivity": "System Activity",
+        "loading": "Loading History..."
+    },
+    "Growth": {
+        "title": "Growth & Analytics",
+        "subtitle": "Visualize your portfolio performance and projected returns.",
+        "portfolioGrowth": "Portfolio Growth",
+        "earningsByCommodity": "Earnings by Commodity",
+        "projectedReturns": "Projected Returns",
+        "calculator": "Earnings Calculator",
+        "estimatedValue": "Estimated Future Value",
+        "monthlyGrowth": "Growth Trend",
+        "noChartData": "No historical data available for chart.",
+        "allTime": "All-Time",
+        "value": "Value",
+        "portfolioValue": "Portfolio Value",
+        "projectedProfitDesc": "Projected based on current GDC performance",
+        "calcNote": "*Projections are based on historical NAV trends and are not guaranteed returns.",
+        "next30": "Next 30 Days",
+        "next90": "Next 90 Days",
+        "yearly": "Yearly Estimate",
+        "loading": "Loading Analytics..."
+    },
+    "Settings": {
+        "title": "Account Settings",
+        "investor": "Investor",
+        "subtitle": "Manage your profile, security, and verification status.",
+        "kyc": "Identity Verification (KYC)",
+        "verified": "Account Verified",
+        "verifiedDesc": "Your identity has been successfully verified. You have full access to all platform features.",
+        "unverified": "Verification Required",
+        "verificationDesc": "Please complete your KYC verification to increase your withdrawal limits and unlock premium commodities.",
+        "uploadDoc": "Upload Identity Document",
+        "uploadLimit": "NIN, Voter's Card, or International Passport (Max 5MB)",
+        "profileInfo": "Profile Information",
+        "fullName": "Full Name",
+        "email": "Email Address",
+        "saveChanges": "Save Changes",
+        "selectFiles": "Select Files",
+        "loading": "Loading Settings...",
+        "profile": "Profile",
+        "security": "Security",
+        "notifications": "Notifications",
+        "marketing": "Marketing",
+        "billing": "Billing"
+    },
+    "Sidebar": {
+        "helpTitle": "Need Help?",
+        "helpDesc": "Contact our support team for any queries about your investments."
+    },
+    "Tooltips": {
+        "totalValue": "Current market value of all your active investments plus accumulated profits.",
+        "totalInvested": "The total amount of capital you have committed to TPIAs.",
+        "totalProfit": "The total earnings generated from your completed and active cycles.",
+        "availableBalance": "Funds currently available in your wallet for immediate withdrawal or new investments.",
+        "earnings": "Accumulated profits from your investments which haven't been moved to your main balance yet.",
+        "lockedBalance": "Capital currently tied up in active TPIAs.",
+        "totalBalance": "The sum of your available balance, earnings, and locked funds."
+    },
+    "Referral": {
+        "title": "Refer & Grow",
+        "code": "Your Referral Code",
+        "copy": "Copy",
+        "copied": "Copied!",
+        "earningsMode": "Earnings Mode",
+        "switchMode": "Switch Mode"
+    },
+    "Security": {
+        "title": "Account Security",
+        "kycStatus": "KYC Status",
+        "verified": "Verified",
+        "pending": "Pending",
+        "notStarted": "Action Required",
+        "activity": "Recent Activity",
+        "lastLogin": "Last Login",
+        "profileUpdate": "Profile Updated",
+        "bankLinked": "Bank Account Linked"
+    },
+    "Maturity": {
+        "title": "Cycle Countdown",
+        "nextCycle": "Next Profit Cycle",
+        "maturity": "Final Maturity",
+        "days": "Days",
+        "hours": "Hours",
+        "viewPortfolio": "View Portfolio",
+        "active": "Active Countdown",
+        "noActive": "No active cycles"
+    },
+    "Success": {
+        "paymentTitle": "Payment Successful!",
+        "paymentDesc": "Your wallet has been credited successfully. The funds are now available for investment.",
+        "amount": "Amount Credited",
+        "reference": "Transaction Reference",
+        "backToWallet": "Back to Wallet",
+        "viewActivity": "View Recent Activity",
+        "done": "Done"
+    }
+}
