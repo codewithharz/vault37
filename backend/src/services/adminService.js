@@ -135,9 +135,9 @@ export const getAdminDashboardStats = async () => {
                 id: t._id,
                 orderNumber: t.tpiaId,
                 totalPrice: t.amount,
-                title: typeof t.commodityId === 'object' ? t.commodityId.name : 'Commodity',
-                username: typeof t.userId === 'object' ? t.userId.fullName : 'User',
-                userEmail: typeof t.userId === 'object' ? t.userId.email : ''
+                title: (t.commodityId && typeof t.commodityId === 'object') ? t.commodityId.name : 'Commodity',
+                username: (t.userId && typeof t.userId === 'object') ? t.userId.fullName : 'User',
+                userEmail: (t.userId && typeof t.userId === 'object') ? t.userId.email : ''
             }
         }))
     ].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))

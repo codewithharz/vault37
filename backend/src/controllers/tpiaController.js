@@ -16,32 +16,44 @@ import { TPIA_CONSTANTS, TPIA_STATUS } from '../config/constants.js';
  * @access  Private
  */
 export const purchaseTPIA = asyncHandler(async (req, res, next) => {
-    const { mode, commodityId, cycleStartMode } = req.body;
+    const { mode, commodityId, cycleStartMode, quantity } = req.body;
     const user = req.user;
 
-    // Purchase TPIA
-    const { tpia, transaction } = await purchaseTPIAService(user.id, mode || user.mode, commodityId, cycleStartMode);
+    // Purchase TPIA (service now handles bulk)
+    const result = await purchaseTPIAService(
+        user.id,
+        mode || user.mode,
+        commodityId,
+        cycleStartMode,
+        quantity || 1
+    );
 
+    // If single purchase (legacy support or quantity=1)
+    if (!Array.isArray(result.tpias)) {
+        res.status(201).json({
+            success: true,
+            message: `TPIA-${result.tpia.tpiaNumber} purchase submitted successfully. Awaiting admin approval.`,
+            data: {
+                tpia: result.tpia,
+                transaction: result.transaction,
+            },
+        });
+        return;
+    }
+
+    // Bulk purchase response
     res.status(201).json({
         success: true,
-        message: `TPIA-${tpia.tpiaNumber} purchase submitted successfully. Awaiting admin approval (auto-approves in ${TPIA_CONSTANTS.ADMIN_APPROVAL_WINDOW_MAX} minutes)`,
+        message: `${result.tpias.length} TPIA blocks purchased successfully. Awaiting admin approval.`,
         data: {
-            tpia: {
-                id: tpia._id,
-                tpiaNumber: tpia.tpiaNumber,
-                gdcNumber: tpia.gdcNumber,
-                amount: tpia.amount,
-                profitAmount: tpia.profitAmount,
-                status: tpia.status,
-                purchaseDate: tpia.purchaseDate,
-                userMode: tpia.userMode,
-            },
-            transaction: {
-                id: transaction._id,
-                reference: transaction.reference,
-                amount: transaction.amount,
-                status: transaction.status,
-            },
+            tpias: result.tpias.map(t => ({
+                id: t._id,
+                tpiaNumber: t.tpiaNumber,
+                gdcNumber: t.gdcNumber,
+                amount: t.amount,
+                status: t.status,
+            })),
+            transaction: result.transaction,
         },
     });
 });
@@ -80,7 +92,9 @@ export const getTPIADetails = asyncHandler(async (req, res, next) => {
 
     const tpia = await TPIA.findById(id)
         .populate('userId', 'fullName email')
-        .populate('approvedBy', 'fullName email');
+        .populate('approvedBy', 'fullName email')
+        .populate('commodityId', 'name symbol navPrice navHistory description')
+        .populate('transactionId');
 
     if (!tpia) {
         return next(new AppError('TPIA not found', 404));
@@ -91,10 +105,33 @@ export const getTPIADetails = asyncHandler(async (req, res, next) => {
         return next(new AppError('Not authorized to view this TPIA', 403));
     }
 
+    // Fetch GDC details
+    const GDC = (await import('../models/GDC.js')).default;
+    const gdc = await GDC.findOne({
+        gdcNumber: tpia.gdcNumber,
+        commodityId: tpia.commodityId
+    }).lean();
+
+    // Calculate days until maturity
+    const daysUntilMaturity = tpia.maturityDate
+        ? Math.ceil((new Date(tpia.maturityDate) - new Date()) / (1000 * 60 * 60 * 24))
+        : null;
+
     res.status(200).json({
         success: true,
         data: {
-            tpia,
+            tpia: {
+                ...tpia.toObject(),
+                daysUntilMaturity,
+                gdc: gdc ? {
+                    gdcNumber: gdc.gdcNumber,
+                    currentFill: gdc.currentFill,
+                    capacity: 10, // GDC_CONSTANTS.TPIAS_PER_GDC
+                    status: gdc.status,
+                    cycleStartDate: gdc.cycleStartDate,
+                    expectedMaturityDate: gdc.expectedMaturityDate
+                } : null
+            },
         },
     });
 });

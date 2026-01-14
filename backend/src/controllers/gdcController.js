@@ -62,3 +62,22 @@ export const updateGDCStatus = asyncHandler(async (req, res) => {
         data: gdc,
     });
 });
+
+/**
+ * @desc    Get user's GDC participation
+ * @route   GET /api/gdc/user-participation
+ * @access  Private
+ */
+export const getUserGDCParticipation = asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const gdcs = await gdcService.getUserGDCParticipation(userId);
+
+    res.status(200).json({
+        success: true,
+        data: {
+            gdcs,
+            total: gdcs.length
+        }
+    });
+});
+

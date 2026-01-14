@@ -28,8 +28,8 @@ const config = {
   // Rate Limiting
   rateLimit: {
     windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS, 10) || 900000, // 15 minutes
-    maxRequests: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS, 10) || 1000,
-    authMax: parseInt(process.env.AUTH_RATE_LIMIT_MAX, 10) || 1000,
+    maxRequests: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS, 10) || 10000, // Increased for dev
+    authMax: parseInt(process.env.AUTH_RATE_LIMIT_MAX, 10) || 10000, // Increased for dev
   },
 
   // Email (optional for now)

@@ -108,12 +108,13 @@ export const getOrCreateFillingGDC = async (commodityId) => {
             currentFill: { $lt: GDC_CONSTANTS.TPIAS_PER_GDC }
         };
 
-        let gdc = await GDC.findOne(query).sort({ gdcNumber: 1 });
+        let gdcs = await GDC.find(query).sort({ gdcNumber: 1 });
 
-        if (gdc) {
+        for (const gdc of gdcs) {
             // Check if it's "effectively" full (including pending TPIAs)
             const pendingCount = await TPIA.countDocuments({
                 gdcNumber: gdc.gdcNumber,
+                commodityId: gdc.commodityId,
                 status: { $ne: 'cancelled' }
             });
 
@@ -122,12 +123,12 @@ export const getOrCreateFillingGDC = async (commodityId) => {
             }
         }
 
-        // 2. No available GDC found, create a new one with a unique global number
-        // Use a lock-like mechanism or just find the max
-        const lastGDC = await GDC.findOne().sort({ gdcNumber: -1 });
+        // 2. No available GDC found, create a new one with a unique number for THIS commodity
+        // Use a lock-like mechanism or just find the max for this commodity
+        const lastGDC = await GDC.findOne({ commodityId }).sort({ gdcNumber: -1 });
         const nextNumber = (lastGDC ? lastGDC.gdcNumber : 0) + GDC_CONSTANTS.GDC_NUMBER_INCREMENT;
 
-        gdc = await GDC.create({
+        const newGdc = await GDC.create({
             gdcNumber: nextNumber,
             commodityId,
             tpias: [],
@@ -135,7 +136,7 @@ export const getOrCreateFillingGDC = async (commodityId) => {
             status: GDC_STATUS.FILLING
         });
 
-        return gdc;
+        return newGdc;
     } catch (error) {
         throw error;
     }
@@ -168,3 +169,63 @@ export const updateGDCStatus = async (gdcId, status) => {
         throw error;
     }
 };
+
+/**
+ * Get user's GDC participation
+ * @param {String} userId - User ID
+ * @returns {Array} List of GDCs user participates in
+ */
+export const getUserGDCParticipation = async (userId) => {
+    try {
+        // Find all TPIAs for this user
+        const userTPIAs = await TPIA.find({ userId }).select('gdcNumber commodityId amount').lean();
+
+        if (userTPIAs.length === 0) {
+            return [];
+        }
+
+        // Group TPIAs by GDC number
+        const gdcMap = {};
+        userTPIAs.forEach(tpia => {
+            if (!gdcMap[tpia.gdcNumber]) {
+                gdcMap[tpia.gdcNumber] = {
+                    gdcNumber: tpia.gdcNumber,
+                    commodityId: tpia.commodityId,
+                    userTPIACount: 0,
+                    userTotalValue: 0
+                };
+            }
+            gdcMap[tpia.gdcNumber].userTPIACount += 1;
+            gdcMap[tpia.gdcNumber].userTotalValue += tpia.amount || 0;
+        });
+
+        // Get GDC details for each unique GDC number
+        const gdcNumbers = Object.keys(gdcMap).map(Number);
+        const gdcs = await GDC.find({ gdcNumber: { $in: gdcNumbers } })
+            .populate('commodityId', 'name type icon symbol')
+            .lean();
+
+        // Merge user participation data with GDC details
+        const result = gdcs.map(gdc => ({
+            _id: gdc._id,
+            gdcNumber: gdc.gdcNumber,
+            commodityId: gdc.commodityId,
+            status: gdc.status,
+            currentCycle: gdc.currentCycle,
+            totalCycles: gdc.totalCycles,
+            currentFill: gdc.currentFill,
+            capacity: GDC_CONSTANTS.TPIAS_PER_GDC,
+            userTPIACount: gdcMap[gdc.gdcNumber]?.userTPIACount || 0,
+            userTotalValue: gdcMap[gdc.gdcNumber]?.userTotalValue || 0,
+            nextCycleDate: gdc.nextCycleDate,
+            activationDate: gdc.activationDate,
+            completionDate: gdc.completionDate,
+            warehouse: gdc.warehouse
+        }));
+
+        return result;
+    } catch (error) {
+        throw error;
+    }
+};
+

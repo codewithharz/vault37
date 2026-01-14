@@ -28,7 +28,7 @@ export function UserHeader() {
     }, []);
 
     const menuItems = [
-        { label: tMenu('profile'), href: '/dashboard/settings', icon: UserCircle },
+        { label: tMenu('profile'), href: '/dashboard/profile', icon: UserCircle },
         { label: tMenu('billing'), href: '/dashboard/wallet', icon: CreditCard },
         { label: tMenu('settings'), href: '/dashboard/settings', icon: Settings },
         { label: tMenu('referrals'), href: '/dashboard/settings', icon: Users },

@@ -114,6 +114,7 @@ class TradeService {
      * @param {Object} gdc 
      */
     async processTPIACompletion(tpia, gdc) {
+        const settings = await configService.getSettings();
         const user = await User.findById(tpia.userId);
         if (!user) throw new Error('User not found');
 
@@ -125,8 +126,9 @@ class TradeService {
 
         if (!cycle) throw new Error(`Active cycle record not found for TPIA ${tpia.tpiaNumber}`);
 
-        // Profit calculation (37% of principal)
-        const profitAmount = tpia.profitAmount || (tpia.amount * 0.37);
+        // Profit calculation (prefer stored amount, fallback to settings rate)
+        const roiRate = settings.tpia.profitAmount / settings.tpia.investmentAmount;
+        const profitAmount = tpia.profitAmount || (tpia.amount * roiRate);
 
         // Record in TPIA profit history
         tpia.profitHistory.push({
@@ -193,7 +195,6 @@ class TradeService {
 
         // Check for Withdrawal Request first
         if (tpia.withdrawalRequested && tpia.investmentPhase === 'EXTENDED') {
-            const settings = await configService.getSettings();
             let penaltyRate = settings.exitPenalties.get(tpia.currentCycle.toString()) || 0;
 
             // If 0, check if previous cycle had a penalty (grace period logic)
@@ -260,7 +261,6 @@ class TradeService {
         // Next cycle or complete
         let shouldContinue = false;
 
-        const settings = await configService.getSettings();
         const tpiaSpecs = settings.tpia;
 
         if (tpia.currentCycle < tpiaSpecs.coreCycles) {
@@ -367,10 +367,13 @@ class TradeService {
             maturityDate: { $lte: now }
         });
 
+        const settings = await configService.getSettings();
+        const roiRate = settings.tpia.profitAmount / settings.tpia.investmentAmount;
+
         let totalProfitDistributed = 0;
         for (const tpia of dueTPIAs) {
             await this.processTPIACompletion(tpia, gdc);
-            totalProfitDistributed += (tpia.profitAmount || (tpia.amount * 0.37));
+            totalProfitDistributed += (tpia.profitAmount || (tpia.amount * roiRate));
         }
 
         // Update GDC nextCycleDate to the next upcoming maturity among its active TPIAs

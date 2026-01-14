@@ -30,7 +30,7 @@ import {
  * @param {String} cycleStartMode - CLUSTER or IMMEDIATE
  * @returns {Object} Created TPIA and transaction
  */
-export const purchaseTPIA = async (userId, userMode, commodityId = null, cycleStartMode = CYCLE_START_MODES.CLUSTER) => {
+export const purchaseTPIA = async (userId, userMode, commodityId = null, cycleStartMode = CYCLE_START_MODES.CLUSTER, quantity = 1) => {
     // 1. Initial checks (outside transaction to fail fast and support standalone DB for simple checks)
     const user = await User.findById(userId);
     if (!user) {
@@ -60,81 +60,105 @@ export const purchaseTPIA = async (userId, userMode, commodityId = null, cycleSt
         const settings = await configService.getSettings();
         const tpiaConfig = settings.tpia;
 
+        // Calculate total required
+        const totalRequired = tpiaConfig.investmentAmount * quantity;
+
         // Atomic balance check
         const walletCheck = await Wallet.findOne({ userId });
 
         // Check available balance
         const availableBalance = walletCheck.balance + walletCheck.earningsBalance - walletCheck.lockedBalance;
-        if (availableBalance < tpiaConfig.investmentAmount) {
+        if (availableBalance < totalRequired) {
             throw new AppError(
-                `Insufficient balance. Required: ₦${tpiaConfig.investmentAmount.toLocaleString()}, Available: ₦${availableBalance.toLocaleString()}`,
+                `Insufficient balance. Required: ₦${totalRequired.toLocaleString()}, Available: ₦${availableBalance.toLocaleString()}`,
                 400
             );
         }
 
-        // Get next TPIA number
-        const tpiaNumber = await TPIA.getNextTPIANumber();
+        // Lock balance (bulk lock)
+        await lockBalance(userId, totalRequired);
 
-        // Calculate profit based on commodity if provided
-        let profitAmount = tpiaConfig.profitAmount;
-        if (commodity) {
-            // Profit = Insured Value (Investment) * 37% (standard rate for now)
-            profitAmount = tpiaConfig.investmentAmount * 0.37;
-        }
+        const createdTPIAs = [];
+        let lastTransaction = null;
 
-        // Calculate GDC number dynamically based on commodity availability
-        const gdc = await getOrCreateFillingGDC(commodityId);
-        const gdcNumber = gdc.gdcNumber;
+        // Process loop
+        for (let i = 0; i < quantity; i++) {
+            // Get next TPIA number (sequential)
+            const tpiaNumber = await TPIA.getNextTPIANumber();
 
-        // Lock balance
-        await lockBalance(userId, tpiaConfig.investmentAmount);
+            // Calculate profit based on system settings
+            let profitAmount = tpiaConfig.profitAmount;
 
-        // Create TPIA (pending approval)
-        const tpia = await TPIA.create({
-            tpiaNumber,
-            gdcNumber,
-            userId,
-            amount: tpiaConfig.investmentAmount,
-            currentValue: tpiaConfig.investmentAmount,
-            profitAmount, // Use the calculated amount (dynamic)
-            userMode,
-            cycleStartMode, // Cluster vs Immediate
-            commodityId, // Link to selected commodity
-            status: TPIA_STATUS.PENDING_APPROVAL,
-            purchaseDate: new Date(),
-        });
+            // If we ever want profit to be a percentage of a dynamic commodity price, 
+            // we calculate the rate from settings: (50,000 / 1,000,000 = 0.05)
+            const roiRate = tpiaConfig.profitAmount / tpiaConfig.investmentAmount;
 
-        // Create transaction
-        const transaction = await Transaction.create({
-            user: userId,
-            wallet: walletCheck._id,
-            type: TRANSACTION_TYPES.TPIA_PURCHASE,
-            amount: tpiaConfig.investmentAmount,
-            status: 'pending',
-            reference: Transaction.generateReference('tpia_purchase'),
-            paymentMethod: 'system',
-            metadata: {
-                tpiaId: tpia._id,
+            if (commodity) {
+                // Default to settings profitAmount, but adaptable if we add custom commodity pricing
+                profitAmount = tpiaConfig.investmentAmount * roiRate;
+            }
+
+            // Calculate GDC number dynamically based on commodity availability
+            // Note: In high concurrency, this might fill up a GDC in the middle of a loop.
+            //Ideally, we should lock/reserve GDC slots, but for now we fetch fresh for each iteration.
+            const gdc = await getOrCreateFillingGDC(commodityId);
+            const gdcNumber = gdc.gdcNumber;
+
+            // Create TPIA (pending approval)
+            const tpia = await TPIA.create({
                 tpiaNumber,
                 gdcNumber,
-            },
-        });
+                userId,
+                amount: tpiaConfig.investmentAmount,
+                currentValue: tpiaConfig.investmentAmount,
+                profitAmount, // Use the calculated amount (dynamic)
+                userMode,
+                cycleStartMode, // Cluster vs Immediate
+                commodityId, // Link to selected commodity
+                status: TPIA_STATUS.PENDING_APPROVAL,
+                purchaseDate: new Date(),
+            });
 
-        // Link transaction to TPIA
-        tpia.transactionId = transaction._id;
-        await tpia.save();
+            // Create transaction (one per TPIA or one bulk? Using one per TPIA for granular tracking)
+            const transaction = await Transaction.create({
+                user: userId,
+                wallet: walletCheck._id,
+                type: TRANSACTION_TYPES.TPIA_PURCHASE,
+                amount: tpiaConfig.investmentAmount,
+                status: 'pending',
+                reference: Transaction.generateReference('tpia_purchase'),
+                paymentMethod: 'system',
+                metadata: {
+                    tpiaId: tpia._id,
+                    tpiaNumber,
+                    gdcNumber,
+                },
+            });
 
-        // Notify user
+            // Link transaction to TPIA
+            tpia.transactionId = transaction._id;
+            await tpia.save();
+
+            // Assign to GDC immediately (as pending) to ensure accurate fill tracking
+            await assignToGDC(tpia);
+
+            createdTPIAs.push(tpia);
+            lastTransaction = transaction; // Just to return something valid typical structure
+        }
+
+        // Notify user (Bulk message)
         await createNotification(userId, {
             title: 'TPIA Purchase Submitted',
-            message: `Your purchase of TPIA-${tpiaNumber} has been submitted and is awaiting approval. Reference: ${transaction.reference}. (Auto-approves in ${tpiaConfig.approvalWindowMax} minutes)`,
+            message: `Your purchase of ${quantity} TPIA block(s) has been submitted and is awaiting approval. (Auto-approves in ${tpiaConfig.approvalWindowMax} minutes)`,
             type: 'info',
-            metadata: { tpiaId: tpia._id, transactionId: transaction._id }
+            metadata: { count: quantity, totalAmount: totalRequired }
         });
 
         return {
-            tpia,
-            transaction,
+            tpias: createdTPIAs,
+            transaction: lastTransaction, // Controller handles array vs single check
+            // Legacy support for single return
+            tpia: createdTPIAs[0]
         };
     } catch (error) {
         throw error;
@@ -411,6 +435,7 @@ export const getUserTPIAs = async (userId, filters = {}) => {
     const query = { userId, ...filters };
 
     return TPIA.find(query)
+        .populate('commodityId', 'name symbol navPrice navHistory description')
         .sort({ tpiaNumber: -1 })
         .lean();
 };

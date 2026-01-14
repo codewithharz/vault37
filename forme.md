@@ -58,3 +58,14 @@ Benefit: This is the industry standard for "critical actions." It ensures that t
 Instead of the change taking effect immediately, it moves to a "Pending Settings Approval" state where another admin must approve it.
 
 Benefit: Eliminates the "single point of failure." One person can't accidentally (or maliciously) change the platform's faith alone.
+
+
+
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+
+Clearing existing database collections to prepare for fresh data seeding
+
+node -e 'const mongoose = require("mongoose"); require("dotenv").config(); mongoose.connect(process.env.MONGODB_URI).then(async () => { const collections = await mongoose.connection.db.collections(); for (let collection of collections) { await collection.drop(); console.log(`Dropped collection: ${collection.collectionName}`); } mongoose.disconnect(); }).catch(err => { console.error(err); process.exit(1); })'

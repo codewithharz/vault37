@@ -4,10 +4,10 @@ import { GDC_CONSTANTS, GDC_STATUS } from '../config/constants.js';
 const gdcSchema = new mongoose.Schema(
     {
         // GDC number (10, 20, 30, 40...)
+        // Unique per commodity
         gdcNumber: {
             type: Number,
             required: true,
-            unique: true,
             index: true,
         },
 
@@ -106,6 +106,7 @@ const gdcSchema = new mongoose.Schema(
 
 // Indexes for performance
 gdcSchema.index({ status: 1, currentFill: 1, commodityId: 1 });
+gdcSchema.index({ gdcNumber: 1, commodityId: 1 }, { unique: true });
 
 // Static method: Find or create GDC by number and commodity
 gdcSchema.statics.findOrCreate = async function (gdcNumber, commodityId) {
@@ -135,34 +136,39 @@ gdcSchema.statics.getCurrentFillingGDC = async function (commodityId) {
 
 // Instance method: Add TPIA to GDC
 gdcSchema.methods.addTPIA = async function (tpia) {
-    // Check if GDC is full
-    if (this.currentFill >= GDC_CONSTANTS.TPIAS_PER_GDC) {
-        throw new Error('GDC is already full');
-    }
-
     // Check if TPIA already exists
-    const exists = this.tpias.some(
-        (t) => t.tpiaNumber === tpia.tpiaNumber
+    const existingIndex = this.tpias.findIndex(
+        (t) => t.tpiaNumber === tpia.tpiaNumber || (t.tpiaId && tpia._id && t.tpiaId.toString() === tpia._id.toString())
     );
 
-    if (exists) {
-        throw new Error('TPIA already in this GDC');
-    }
+    if (existingIndex !== -1) {
+        // Update existing entry (e.g. setting approvalDate)
+        this.tpias[existingIndex].approvalDate = tpia.approvalDate || this.tpias[existingIndex].approvalDate;
+        this.tpias[existingIndex].tpiaId = tpia._id;
+    } else {
+        // Check if GDC is full
+        if (this.currentFill >= GDC_CONSTANTS.TPIAS_PER_GDC) {
+            throw new Error('GDC is already full');
+        }
 
-    // Add TPIA
-    this.tpias.push({
-        tpiaId: tpia._id,
-        tpiaNumber: tpia.tpiaNumber,
-        userId: tpia.userId,
-        purchaseDate: tpia.purchaseDate,
-        approvalDate: tpia.approvalDate,
-    });
+        // Add new TPIA
+        this.tpias.push({
+            tpiaId: tpia._id,
+            tpiaNumber: tpia.tpiaNumber,
+            userId: tpia.userId,
+            purchaseDate: tpia.purchaseDate,
+            approvalDate: tpia.approvalDate,
+        });
+    }
 
     this.currentFill = this.tpias.length;
 
-    // Update status if full
+    // Update status based on fill count
     if (this.currentFill >= GDC_CONSTANTS.TPIAS_PER_GDC) {
-        this.status = GDC_STATUS.FULL;
+        // Only mark as FULL if not already ACTIVE/COMPLETED
+        if (this.status === GDC_STATUS.FILLING) {
+            this.status = GDC_STATUS.FULL;
+        }
     }
 
     return this.save();

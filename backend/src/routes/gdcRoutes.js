@@ -4,12 +4,16 @@ import {
     getGDCs,
     getGDCDetails,
     getGDCStats,
-    updateGDCStatus
+    updateGDCStatus,
+    getUserGDCParticipation
 } from '../controllers/gdcController.js';
 
 const router = express.Router();
 
-// All routes are protected and admin-only for now
+// User-accessible routes (protected but not admin-only)
+router.get('/user-participation', protect, getUserGDCParticipation);
+
+// All routes below are protected and admin-only
 router.use(protect);
 router.use(authorize('admin'));
 
@@ -19,3 +23,4 @@ router.get('/:id', getGDCDetails);
 router.patch('/:id/status', updateGDCStatus);
 
 export default router;
+

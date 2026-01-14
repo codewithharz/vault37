@@ -49,7 +49,7 @@ export const useStore = create<AppState>((set) => ({
         try {
             const response = await api.get('/auth/me');
             if (response.data.success) {
-                set({ user: response.data.data });
+                set({ user: response.data.data.user });
             }
         } catch (error) {
             console.error('Failed to fetch profile', error);

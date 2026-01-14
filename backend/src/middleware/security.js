@@ -77,7 +77,7 @@ export const authLimiter = rateLimit({
  */
 export const apiLimiter = rateLimit({
     windowMs: config.rateLimit.windowMs,
-    max: 1000,
+    max: 10000, // Increased for development
     message: 'Too many API requests, please try again later',
     standardHeaders: true,
     legacyHeaders: false,

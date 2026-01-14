@@ -17,6 +17,18 @@ export const purchaseTPIASchema = Joi.object({
         .valid('CLUSTER', 'IMMEDIATE')
         .default('CLUSTER')
         .optional(),
+    quantity: Joi.number()
+        .integer()
+        .min(1)
+        .max(10)
+        .default(1)
+        .optional()
+        .messages({
+            'number.base': 'Quantity must be a number',
+            'number.integer': 'Quantity must be an integer',
+            'number.min': 'Quantity must be at least 1',
+            'number.max': 'Quantity cannot exceed 10',
+        }),
 });
 
 /**
